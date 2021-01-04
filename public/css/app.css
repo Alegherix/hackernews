@@ -15,6 +15,10 @@ body {
   padding: 1rem;
 }
 
+.createPost h2 {
+  margin-bottom: 2rem;
+}
+
 .createPost .field {
   max-width: 650px;
   display: flex;
@@ -30,6 +34,7 @@ body {
 .createPost .field textarea {
   border-radius: 5px;
   border: none;
+  padding: 0.4rem;
 }
 
 .createPost .field input {
@@ -41,5 +46,10 @@ body {
   max-width: 414px;
   font-size: 22px;
   padding: 0.2rem;
+}
+
+.createPost .errorMsg {
+  color: whitesmoke;
+  margin: 0.2rem 0;
 }
 

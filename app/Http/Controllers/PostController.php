@@ -8,49 +8,31 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view("posts.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $signedIn = Auth::check();
-        if (!$signedIn) {
-            return ("Sign in first");
-        }
 
+    public function store()
+    {
+        $this->validatePost();
         // Since we know we're signed in, fetch users id for foreign key
         $user_id = Auth::user()->id;
 
-        $post = new Post();
-        $post->author_id = $user_id;
-        $post->title = request("title");
-        $post->URL = request("URL");
-        $post->body = request("body");
-
-        $post->save();
+        Post::create([
+            "author_id" => $user_id,
+            "title" => request("title"),
+            "url" => request("url"),
+            "body" => request("body")
+        ]);
 
         return redirect("/posts");
     }
@@ -63,7 +45,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view("posts.show");
+        return view("posts.show", compact("post"));
     }
 
     /**
@@ -74,7 +56,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view("posts.edit", compact("post"));
     }
 
     /**
@@ -84,19 +66,34 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Post $post)
+    {
+        // Om user_id =/ author_id så returnera att dem ej kan uppdatera andras poster
+        $user_id = Auth::user()->id;
+        $author_id = (int)$post->author_id;
+
+        if ($user_id !== $author_id) {
+            return ("You can only edit your own posts");
+        }
+
+        // Det är samma använare, och användaren är inloggad
+        $post->update($this->validatePost());
+
+        return redirect("/posts/" . $post->id);
+    }
+
+
+    public function destroy(Post $post)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
+    public function validatePost()
     {
-        //
+        return request()->validate([
+            "title" => ["required", "min:3"],
+            "url" => "required",
+            "body" => "required"
+        ]);
     }
 }

@@ -8,7 +8,18 @@
 </head>
 
 <body>
-    <p>Placeholder</p>
+    <section>
+        <div class="postHeading">
+            <div class="likesContainer"></div>
+            <div class="titleContainer"></div>
+        </div>
+
+        <div class="postContent">
+            <p>Text taken from db here</p>
+        </div>
+
+    </section>
+
 </body>
 
 </html>
