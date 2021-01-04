@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -24,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view("posts.create");
     }
 
     /**
@@ -35,7 +36,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $signedIn = Auth::check();
+        if (!$signedIn) {
+            return ("Sign in first");
+        }
+
+        // Since we know we're signed in, fetch users id for foreign key
+        $user_id = Auth::user()->id;
+
+        $post = new Post();
+        $post->author_id = $user_id;
+        $post->title = request("title");
+        $post->URL = request("URL");
+        $post->body = request("body");
+
+        $post->save();
+
+        return redirect("/posts");
     }
 
     /**
@@ -46,7 +63,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view("posts.show");
     }
 
     /**

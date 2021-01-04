@@ -1,0 +1,43 @@
+// .createPostContainer {
+//     margi
+// }
+
+.createPost {
+    max-width: 1040px;
+    margin: 0 auto;
+    background-color: #767373;
+    padding: 1rem;
+
+    .field {
+        max-width: 650px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+
+        label {
+            margin-bottom: 0.3rem;
+        }
+
+        input,
+        textarea {
+            border-radius: 5px;
+            border: none;
+        }
+
+        input {
+            height: 40px;
+        }
+    }
+
+    .submit {
+        button {
+            width: 100%;
+            max-width: 414px;
+            font-size: 22px;
+            padding: 0.2rem;
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+    }
+}

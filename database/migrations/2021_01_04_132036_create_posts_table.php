@@ -17,9 +17,9 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->unsignedBigInteger("author_id");
             $table->string("title");
-            $table->string("link");
+            $table->string("url");
             $table->string("body");
-            $table->unsignedBigInteger("upvotes");
+            $table->unsignedBigInteger("upvotes")->default(0);
             $table->timestamps();
         });
     }
