@@ -12,7 +12,7 @@ class PostController extends Controller
 
     public function index()
     {
-        //
+        return view("posts.index");
     }
 
     public function create()
@@ -79,7 +79,8 @@ class PostController extends Controller
         // Det är samma använare, och användaren är inloggad
         $post->update($this->validatePost());
 
-        return redirect("/posts/" . $post->id);
+        // return redirect("/posts/" . $post->id);
+        return redirect(route("posts.show", $post));
     }
 
 
