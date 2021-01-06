@@ -3,35 +3,8 @@
 // }
 
 .createPost {
-    max-width: 1040px;
-    margin: 0 auto;
-    background-color: #767373;
-    padding: 1rem;
-
     h2 {
         margin-bottom: 2rem;
-    }
-
-    .field {
-        max-width: 650px;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1rem;
-
-        label {
-            margin-bottom: 0.3rem;
-        }
-
-        input,
-        textarea {
-            border-radius: 5px;
-            border: none;
-            padding: 0.4rem;
-        }
-
-        input {
-            height: 40px;
-        }
     }
 
     .submit {

@@ -1,0 +1,23 @@
+.settings {
+    h2 {
+        margin-bottom: 0.5rem;
+    }
+    .separator {
+        width: 100%;
+        margin: 0 auto;
+        height: 2px;
+        background-color: #444;
+        margin-bottom: 1rem;
+    }
+
+    .profileContainer {
+        .avatar {
+            width: 145px;
+            height: 145px;
+            border-radius: 10px;
+            background-color: #aaa;
+            margin: 0.5rem 0;
+        }
+        margin-bottom: 1rem;
+    }
+}

@@ -12,6 +12,9 @@ nav {
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  background-color: #666;
+  align-items: center;
+  color: white;
 }
 
 nav .logo {
@@ -43,40 +46,39 @@ nav .registerNav .userContainer {
 nav .registerNav .separator {
   height: 15px;
   width: 2px;
-  background-color: black;
+  background-color: white;
 }
 
-.createPost {
-  max-width: 1040px;
-  margin: 0 auto;
-  background-color: #767373;
-  padding: 1rem;
-}
-
-.createPost h2 {
-  margin-bottom: 2rem;
-}
-
-.createPost .field {
+.field {
   max-width: 650px;
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
 }
 
-.createPost .field label {
+.field label {
   margin-bottom: 0.3rem;
 }
 
-.createPost .field input,
-.createPost .field textarea {
+.field input,
+.field textarea {
   border-radius: 5px;
   border: none;
   padding: 0.4rem;
 }
 
-.createPost .field input {
+.field input {
   height: 40px;
+}
+
+.content {
+  padding: 1rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.createPost h2 {
+  margin-bottom: 2rem;
 }
 
 .createPost .submit button {
@@ -89,5 +91,29 @@ nav .registerNav .separator {
 .createPost .errorMsg {
   color: whitesmoke;
   margin: 0.2rem 0;
+}
+
+.settings h2 {
+  margin-bottom: 0.5rem;
+}
+
+.settings .separator {
+  width: 100%;
+  margin: 0 auto;
+  height: 2px;
+  background-color: #444;
+  margin-bottom: 1rem;
+}
+
+.settings .profileContainer {
+  margin-bottom: 1rem;
+}
+
+.settings .profileContainer .avatar {
+  width: 145px;
+  height: 145px;
+  border-radius: 10px;
+  background-color: #aaa;
+  margin: 0.5rem 0;
 }
 

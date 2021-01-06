@@ -37,35 +37,17 @@ class PostController extends Controller
         return redirect("/posts");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
         return view("posts.show", compact("post"));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Post $post)
     {
         return view("posts.edit", compact("post"));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function update(Post $post)
     {
         // Om user_id =/ author_id så returnera att dem ej kan uppdatera andras poster
