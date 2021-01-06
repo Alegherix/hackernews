@@ -35,3 +35,4 @@ Route::get("/posts/{post}/edit", [PostController::class, "edit"]);
 Route::put("/users/settings", [UserController::class, "update"]);
 Route::get("/users/settings", [UserController::class, "edit"])->name("user.settings");
 Route::get("/users/{id}", [UserController::class, "show"]);
+Route::put("/users/updateavatar", [UserController::class, "updateAvatar"]);

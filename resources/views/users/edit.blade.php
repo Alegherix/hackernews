@@ -9,16 +9,21 @@
     <div class="profileContainer">
         <p>Profile Avatar</p>
         <div class="avatar">
-
+            <img class="avatarImg" src="{{ asset($user->avatar) }}">
         </div>
-        <button class="avatarUpload">
-            Upload avatar
-        </button>
     </div>
 
-    <form method="POST" action="/users/settings">
+
+    <form method="POST" action="/users/settings" enctype="multipart/form-data">
         @csrf
         @method("PUT")
+
+        <div class="avatarInputContainer">
+            <input id="avatar" type="file" class="avatarInput" name="avatar">
+            @error("avatar")
+            <p class="errorMsg">{{$message}}</p>
+            @enderror
+        </div>
 
         <div class="field">
             <label for="title">Email</label>

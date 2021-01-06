@@ -117,3 +117,13 @@ nav .registerNav .separator {
   margin: 0.5rem 0;
 }
 
+.settings form .avatarInputContainer {
+  margin-bottom: 1rem;
+}
+
+.settings .avatarImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
