@@ -8,6 +8,44 @@ body {
   background-color: #7460c5;
 }
 
+nav {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav .logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+nav .registerNav {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+nav .registerNav a {
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem;
+}
+
+nav .registerNav a:hover {
+  text-decoration: underline;
+}
+
+nav .registerNav .userContainer {
+  display: flex;
+  align-items: center;
+}
+
+nav .registerNav .separator {
+  height: 15px;
+  width: 2px;
+  background-color: black;
+}
+
 .createPost {
   max-width: 1040px;
   margin: 0 auto;

@@ -7,3 +7,41 @@
 body {
     background-color: #7460c5;
 }
+
+nav {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .registerNav {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+
+        a {
+            text-decoration: none;
+            color: white;
+            padding: 0.5rem;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .userContainer {
+            display: flex;
+            align-items: center;
+        }
+
+        .separator {
+            height: 15px;
+            width: 2px;
+            background-color: black;
+        }
+    }
+}
