@@ -1,25 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends("layout")
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<!-- https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css -->
 
-<body>
-    <section>
-        <div class="postHeading">
-            <div class="likesContainer"></div>
-            <div class="titleContainer"></div>
+@section("content")
+<section>
+    <div class="specificPostContainer">
+        <div class="postContainer">
+            <div class="likesContainer">
+                <p>/\</p>
+                <p>100</p>
+            </div>
+            <div class="postInfoContainer">
+                <h2>Title of the post whatever it is</h2>
+                <div class="infoContainer">
+                    <p>Posted by: Name</p>
+                    <p>Date</p>
+                    <p>x</p>
+                    <p>x</p>
+                </div>
+            </div>
         </div>
-
-        <div class="postContent">
-            <p>Text taken from db here</p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque qui, aperiam architecto saepe, fugiat eum suscipit dicta facilis, reiciendis assumenda quibusdam! Inventore unde fuga blanditiis molestiae laborum obcaecati eligendi fugiat, maiores a nostrum porro animi iste? Magnam laudantium commodi aspernatur!
+        </p>
+        <div class="commentInfoContainer">
+            @if (Auth::user()!==null)
+            <p>Comment as: {{Auth::user()->name}}</p>
+            @endif
+            <p>x comments</p>
         </div>
+        <form method="POST" action="/comments">
+            @csrf
+            <div class="field">
+                <label for="body"></label>
+                <textarea class="commentArea" name="body" id="body" placeholder="What are your thought?"></textarea>
 
-    </section>
+                @error("body")
+                <p class="errorMsg">{{$message}}</p>
+                @enderror
 
-</body>
+                <button class="commentBtn" type="submit">Post Comment</button>
+            </div>
+        </form>
+        <div class="separator"></div>
+        <!-- Här behöver vi en Collection Loop baserat på Alla kommentarer för posten -->
 
-</html>
+    </div>
+
+
+</section>
+
+@endsection

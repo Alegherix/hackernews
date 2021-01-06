@@ -27,14 +27,16 @@ class PostController extends Controller
         // Since we know we're signed in, fetch users id for foreign key
         $user_id = Auth::user()->id;
 
-        Post::create([
+        $post = Post::create([
             "author_id" => $user_id,
             "title" => request("title"),
             "url" => request("url"),
             "body" => request("body")
         ]);
 
-        return redirect("/posts");
+
+
+        return redirect("/posts/{$post->id}");
     }
 
     public function show(Post $post)

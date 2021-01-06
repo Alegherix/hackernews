@@ -5,14 +5,16 @@
 }
 
 body {
-    background-color: #7460c5;
+    background-color: $jam;
+    color: $lightSky;
+    font-family: "Nunito", sans-serif;
 }
 
 nav {
     padding: 1rem;
     display: flex;
     justify-content: space-between;
-    background-color: #666;
+    background-color: $interestBlue;
     align-items: center;
     color: white;
 
