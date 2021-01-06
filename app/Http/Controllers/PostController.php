@@ -34,8 +34,6 @@ class PostController extends Controller
             "body" => request("body")
         ]);
 
-
-
         return redirect("/posts/{$post->id}");
     }
 

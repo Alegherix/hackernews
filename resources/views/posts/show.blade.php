@@ -23,13 +23,15 @@
         <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque qui, aperiam architecto saepe, fugiat eum suscipit dicta facilis, reiciendis assumenda quibusdam! Inventore unde fuga blanditiis molestiae laborum obcaecati eligendi fugiat, maiores a nostrum porro animi iste? Magnam laudantium commodi aspernatur!
         </p>
+        <!-- Gör de enbart tillgängligt att posta för inloggade users -->
+        @if (Auth::user()!==null)
         <div class="commentInfoContainer">
-            @if (Auth::user()!==null)
+
             <p>Comment as: {{Auth::user()->name}}</p>
-            @endif
+
             <p>x comments</p>
         </div>
-        <form method="POST" action="/comments">
+        <form method="POST" action="/comments/{{$post->id}}">
             @csrf
             <div class="field">
                 <label for="body"></label>
@@ -42,6 +44,7 @@
                 <button class="commentBtn" type="submit">Post Comment</button>
             </div>
         </form>
+        @endif
         <div class="separator"></div>
         <!-- Här behöver vi en Collection Loop baserat på Alla kommentarer för posten -->
 

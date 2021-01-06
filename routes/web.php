@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,10 @@ Route::get("/posts/{post}/edit", [PostController::class, "edit"]);
 
 
 // Route::get("/users", [UserController::class, "update"]);
-Route::put("/users/settings", [UserController::class, "update"]);
-Route::get("/users/settings", [UserController::class, "edit"])->name("user.settings");
+Route::put("/settings", [UserController::class, "update"]);
+Route::get("/settings", [UserController::class, "edit"])->name("settings");
 Route::get("/users/{id}", [UserController::class, "show"]);
-Route::put("/users/updateavatar", [UserController::class, "updateAvatar"]);
+// Route::put("/users/updateavatar", [UserController::class, "updateAvatar"]);
+
+
+Route::post("/comments/{post}", [CommentController::class, "store"]);

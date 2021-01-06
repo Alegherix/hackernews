@@ -9,12 +9,16 @@
     <div class="profileContainer">
         <p>Profile Avatar</p>
         <div class="avatar">
+            @if (Auth::user()->avatar)
             <img class="avatarImg" src="{{ asset($user->avatar) }}">
+            @else
+            <img class="avatarImg" src="{{ asset('images/defImg.png') }}">
+            @endif
         </div>
     </div>
 
 
-    <form method="POST" action="/users/settings" enctype="multipart/form-data">
+    <form method="POST" action="/settings" enctype="multipart/form-data">
         @csrf
         @method("PUT")
 

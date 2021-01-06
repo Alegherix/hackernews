@@ -36,7 +36,7 @@
                 @else
                 <li>
                     <div class="userContainer">
-                        <a class="" href="{{ route('user.settings') }}" v-pre>
+                        <a class="" href="{{ route('settings') }}" v-pre>
                             {{ Auth::user()->name }}
                         </a>
                         <div class="separator"></div>

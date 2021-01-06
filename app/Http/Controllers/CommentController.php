@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -33,9 +35,23 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Post $post)
     {
-        //
+        // Validera input före vi insertar i databasen
+        request()->validate([
+            "body" => "required|min:3"
+        ]);
+
+        $post_id = $post->id;
+        $user_id = Auth::user()->id;
+
+        Comment::create([
+            "post_id" => $post_id,
+            "author_id" => $user_id,
+            "body" => request()->body
+        ]);
+
+        return redirect(route("posts.show", $post));
     }
 
     /**
@@ -81,5 +97,9 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         //
+    }
+
+    public function validateComment()
+    {
     }
 }
