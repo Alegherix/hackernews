@@ -37,8 +37,10 @@
         }
 
         h2 {
-            color: $grass;
             font-size: 26px;
+            a {
+                color: $grass;
+            }
             @media screen and (min-width: 768px) {
                 font-size: 24px;
             }
@@ -50,6 +52,17 @@
             display: flex;
             min-width: 300px;
             justify-content: space-between;
+            p {
+                margin-right: 1.5rem;
+            }
+
+            a {
+                margin-right: 1.2rem;
+                &:hover {
+                    scale: 1.15;
+                    cursor: pointer;
+                }
+            }
         }
     }
 

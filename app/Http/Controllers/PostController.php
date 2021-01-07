@@ -84,9 +84,14 @@ class PostController extends Controller
     }
 
 
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        if ((int)$post->author_id !== Auth::user()->id) {
+            return ("Nice try, you can only delete your own Posts");
+        };
+        $post->delete();
+        return redirect(route('home'));
     }
 
     public function validatePost()

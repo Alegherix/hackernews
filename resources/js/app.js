@@ -37,7 +37,6 @@ async function enableDeleteComments() {
     const deleteIcon = document.querySelector(".deleteCommentIcon");
     if (deleteIcon) {
         deleteIcon.addEventListener("click", () => {
-            console.log("Pressing icon");
             document.querySelector(".deleteCommentForm").submit();
         });
     }

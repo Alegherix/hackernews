@@ -130,8 +130,11 @@ nav .registerNav .separator {
 }
 
 .specificPostContainer .postContainer h2 {
-  color: #75f581;
   font-size: 26px;
+}
+
+.specificPostContainer .postContainer h2 a {
+  color: #75f581;
 }
 
 @media screen and (min-width: 768px) {
@@ -150,6 +153,19 @@ nav .registerNav .separator {
   display: flex;
   min-width: 300px;
   justify-content: space-between;
+}
+
+.specificPostContainer .postContainer .infoContainer p {
+  margin-right: 1.5rem;
+}
+
+.specificPostContainer .postContainer .infoContainer a {
+  margin-right: 1.2rem;
+}
+
+.specificPostContainer .postContainer .infoContainer a:hover {
+  scale: 1.15;
+  cursor: pointer;
 }
 
 .specificPostContainer .commentInfoContainer {

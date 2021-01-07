@@ -11,12 +11,18 @@
                 <p>100</p>
             </div>
             <div class="postInfoContainer">
-                <h2>Title of the post whatever it is</h2>
+                <h2 class="postTitle"><a href="{{$post->url}}">Title of the post whatever it is</a></h2>
                 <div class="infoContainer">
                     <p>Posted by: {{$post->author}}</p>
                     <p>{{$post->created_at}}</p>
-                    <i class="fas fa-edit"></i>
-                    <i class="fas fa-trash"></i>
+                    @if(Auth::user()->id === (int)$post->author_id)
+                    <a href="{{ route('posts.edit', $post) }}"><i class="fas fa-edit"></i></a>
+                    <form method="POST" class="deleteCommentForm" action="/posts/{{$post->id}}">
+                        @method("DELETE")
+                        @csrf
+                        <i class="fas fa-trash deleteCommentIcon"></i>
+                    </form>
+                    @endif
                 </div>
             </div>
         </div>
@@ -60,11 +66,10 @@
                     @auth
                     @if(Auth::user()->id == $comment->author_id)
                     <i class="fas fa-edit"></i>
-                    <!-- <a class="btn btn-danger" href="/comments/{{$comment->id}}/delete">Delete</a> -->
                     <form method="POST" class="deleteCommentForm" action="/comments/{{$comment->id}}">
                         @method("DELETE")
                         @csrf
-                        <i class="fas fa-trash deleteCommentIcon" data-comment_id="{{$comment->id}}"></i>
+                        <i class="fas fa-trash deleteCommentIcon"></i>
                     </form>
                     @endauth
                     @endif

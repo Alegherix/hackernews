@@ -2925,7 +2925,6 @@ function _enableDeleteComments() {
 
             if (deleteIcon) {
               deleteIcon.addEventListener("click", function () {
-                console.log("Pressing icon");
                 document.querySelector(".deleteCommentForm").submit();
               });
             }
