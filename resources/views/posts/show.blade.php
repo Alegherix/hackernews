@@ -13,8 +13,8 @@
             <div class="postInfoContainer">
                 <h2>Title of the post whatever it is</h2>
                 <div class="infoContainer">
-                    <p>Posted by: Name</p>
-                    <p>Date</p>
+                    <p>Posted by: {{$post->author}}</p>
+                    <p>{{$post->created_at}}</p>
                     <p>x</p>
                     <p>x</p>
                 </div>
@@ -29,7 +29,7 @@
 
             <p>Comment as: {{Auth::user()->name}}</p>
 
-            <p>x comments</p>
+            <p>{{$post->comment_amount}} comments</p>
         </div>
         <form method="POST" action="/comments/{{$post->id}}">
             @csrf
@@ -47,7 +47,24 @@
         @endif
         <div class="separator"></div>
         <!-- Här behöver vi en Collection Loop baserat på Alla kommentarer för posten -->
+        @foreach ($comments as $comment)
+        <div class="commentContainer">
+            <div class="likesContainer">
+                <p>/\</p>
+                <p>100</p>
+            </div>
+            <div class="comment">
+                <div class="commentInfoContainer">
+                    <p>{{$comment->author}}</p>
+                    <p>{{$comment->updated_at}}</p>
+                </div>
+                <div class="commentBodySection">
+                    <p>{{$comment->body}}</p>
+                </div>
+            </div>
+        </div>
 
+        @endforeach
     </div>
 
 

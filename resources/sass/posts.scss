@@ -87,4 +87,24 @@
         background-color: $grape;
         margin: 1.7rem 0;
     }
+
+    .commentContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        .likesContainer {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comment {
+            .commentInfoContainer {
+                margin: 0 1.5rem;
+            }
+        }
+    }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +41,23 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view("posts.show", compact("post"));
+
+        // Hämtar alla relevanta kommentarer till posten
+        $allComments = Comment::all();
+        $comments = $allComments->where("post_id", $post->id);
+        $comments = $comments->map(function ($author) {
+            $username = User::find($author->author_id)->name;
+            $author["author"] = $username;
+            return $author;
+        });
+
+        // Skapar ett nytt fält i post baserat på
+        // name för authorn av posten
+        $posterName = User::find($post->author_id)->name;
+        $post["author"] = $posterName;
+        $post["comment_amount"] = $comments->count();
+
+        return view("posts.show", ["post" => $post, "comments" => $comments]);
     }
 
 

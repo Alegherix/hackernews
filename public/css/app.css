@@ -170,6 +170,24 @@ nav .registerNav .separator {
   margin: 1.7rem 0;
 }
 
+.specificPostContainer .commentContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.specificPostContainer .commentContainer .likesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.specificPostContainer .commentContainer .comment .commentInfoContainer {
+  margin: 0 1.5rem;
+}
+
 .settings h2 {
   margin-bottom: 0.5rem;
 }
