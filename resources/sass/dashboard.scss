@@ -1,0 +1,26 @@
+.welcomeSection {
+    display: flex;
+    background-color: $interestBlue;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    gap: 1rem;
+    padding: 0.5rem;
+
+    .postInfoContainer {
+        display: flex;
+        flex-direction: column;
+        flex: 2;
+
+        .titleContainer {
+            font-size: 22px;
+        }
+
+        .postDescContainer {
+            font-size: 14px;
+            display: flex;
+            p {
+                margin-right: 2rem;
+            }
+        }
+    }
+}

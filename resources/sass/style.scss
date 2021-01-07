@@ -10,6 +10,15 @@ body {
     font-family: "Nunito", sans-serif;
 }
 
+a {
+    color: $lightSky;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 nav {
     padding: 1rem;
     display: flex;
@@ -29,13 +38,7 @@ nav {
         gap: 1rem;
 
         a {
-            text-decoration: none;
-            color: white;
             padding: 0.5rem;
-
-            &:hover {
-                text-decoration: underline;
-            }
         }
 
         .userContainer {
@@ -77,4 +80,12 @@ nav {
     padding: 1rem;
     max-width: 1040px;
     margin: 0 auto;
+}
+
+.likesContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
 }

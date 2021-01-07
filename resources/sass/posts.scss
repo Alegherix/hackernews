@@ -33,6 +33,7 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            padding-top: 0.5rem;
         }
 
         h2 {
@@ -99,11 +100,16 @@
         .likesContainer {
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
 
         .comment {
             .commentInfoContainer {
-                margin: 0 1.5rem;
+                margin: 0 1.5rem 0 0;
+                p,
+                i {
+                    margin-right: 0.7rem;
+                }
             }
         }
     }

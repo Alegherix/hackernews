@@ -7,7 +7,7 @@
     <div class="specificPostContainer">
         <div class="postContainer">
             <div class="likesContainer">
-                <p>/\</p>
+                <i class="fas fa-chevron-up"></i>
                 <p>100</p>
             </div>
             <div class="postInfoContainer">
@@ -15,8 +15,8 @@
                 <div class="infoContainer">
                     <p>Posted by: {{$post->author}}</p>
                     <p>{{$post->created_at}}</p>
-                    <p>x</p>
-                    <p>x</p>
+                    <i class="fas fa-edit"></i>
+                    <i class="fas fa-trash"></i>
                 </div>
             </div>
         </div>
@@ -50,13 +50,17 @@
         @foreach ($comments as $comment)
         <div class="commentContainer">
             <div class="likesContainer">
-                <p>/\</p>
+                <i class="fas fa-chevron-up"></i>
                 <p>100</p>
             </div>
             <div class="comment">
                 <div class="commentInfoContainer">
                     <p>{{$comment->author}}</p>
                     <p>{{$comment->updated_at}}</p>
+                    @if(Auth::user()->id == $comment->author_id)
+                    <i class="fas fa-edit"></i>
+                    <i class="fas fa-trash"></i>
+                    @endif
                 </div>
                 <div class="commentBodySection">
                     <p>{{$comment->body}}</p>

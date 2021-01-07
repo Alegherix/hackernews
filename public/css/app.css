@@ -10,6 +10,15 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+a {
+  color: #e5e8ee;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 nav {
   padding: 1rem;
   display: flex;
@@ -31,13 +40,7 @@ nav .registerNav {
 }
 
 nav .registerNav a {
-  text-decoration: none;
-  color: white;
   padding: 0.5rem;
-}
-
-nav .registerNav a:hover {
-  text-decoration: underline;
 }
 
 nav .registerNav .userContainer {
@@ -79,6 +82,14 @@ nav .registerNav .separator {
   margin: 0 auto;
 }
 
+.likesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
 .createPost h2 {
   margin-bottom: 2rem;
 }
@@ -107,6 +118,7 @@ nav .registerNav .separator {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding-top: 0.5rem;
 }
 
 .specificPostContainer .postContainer h2 {
@@ -182,10 +194,16 @@ nav .registerNav .separator {
 .specificPostContainer .commentContainer .likesContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .specificPostContainer .commentContainer .comment .commentInfoContainer {
-  margin: 0 1.5rem;
+  margin: 0 1.5rem 0 0;
+}
+
+.specificPostContainer .commentContainer .comment .commentInfoContainer p,
+.specificPostContainer .commentContainer .comment .commentInfoContainer i {
+  margin-right: 0.7rem;
 }
 
 .settings h2 {
@@ -220,5 +238,33 @@ nav .registerNav .separator {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+}
+
+.welcomeSection {
+  display: flex;
+  background-color: #303955;
+  border-radius: 5px;
+  margin-bottom: 4px;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.welcomeSection .postInfoContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+
+.welcomeSection .postInfoContainer .titleContainer {
+  font-size: 22px;
+}
+
+.welcomeSection .postInfoContainer .postDescContainer {
+  font-size: 14px;
+  display: flex;
+}
+
+.welcomeSection .postInfoContainer .postDescContainer p {
+  margin-right: 2rem;
 }
 
