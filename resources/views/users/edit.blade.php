@@ -39,7 +39,7 @@
 
         <div class="field">
             <label for="password">Password</label>
-            <input type="password" name="password" value="{{ $user->password}}">
+            <input type="password" name="password">
             @error("password")
             <p class="errorMsg">The password has to have a min length of 7</p>
             @enderror

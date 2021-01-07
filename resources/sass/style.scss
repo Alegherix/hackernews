@@ -89,3 +89,11 @@ nav {
     align-items: center;
     padding-top: 0.5rem;
 }
+
+.fa-trash {
+    cursor: pointer;
+    // transition: 0.2s ease;
+    &:hover {
+        scale: 1.15;
+    }
+}

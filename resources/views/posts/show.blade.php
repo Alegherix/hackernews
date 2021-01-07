@@ -24,7 +24,7 @@
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque qui, aperiam architecto saepe, fugiat eum suscipit dicta facilis, reiciendis assumenda quibusdam! Inventore unde fuga blanditiis molestiae laborum obcaecati eligendi fugiat, maiores a nostrum porro animi iste? Magnam laudantium commodi aspernatur!
         </p>
         <!-- Gör de enbart tillgängligt att posta för inloggade users -->
-        @if (Auth::user()!==null)
+        @auth
         <div class="commentInfoContainer">
 
             <p>Comment as: {{Auth::user()->name}}</p>
@@ -44,7 +44,7 @@
                 <button class="commentBtn" type="submit">Post Comment</button>
             </div>
         </form>
-        @endif
+        @endauth
         <div class="separator"></div>
         <!-- Här behöver vi en Collection Loop baserat på Alla kommentarer för posten -->
         @foreach ($comments as $comment)
@@ -57,9 +57,16 @@
                 <div class="commentInfoContainer">
                     <p>{{$comment->author}}</p>
                     <p>{{$comment->updated_at}}</p>
+                    @auth
                     @if(Auth::user()->id == $comment->author_id)
                     <i class="fas fa-edit"></i>
-                    <i class="fas fa-trash"></i>
+                    <!-- <a class="btn btn-danger" href="/comments/{{$comment->id}}/delete">Delete</a> -->
+                    <form method="POST" class="deleteCommentForm" action="/comments/{{$comment->id}}">
+                        @method("DELETE")
+                        @csrf
+                        <i class="fas fa-trash deleteCommentIcon" data-comment_id="{{$comment->id}}"></i>
+                    </form>
+                    @endauth
                     @endif
                 </div>
                 <div class="commentBodySection">
@@ -71,7 +78,7 @@
         @endforeach
     </div>
 
-
+    <script src="/js/app.js"></script>
 </section>
 
 @endsection

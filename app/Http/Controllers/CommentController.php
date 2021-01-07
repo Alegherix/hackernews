@@ -62,7 +62,8 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        return ("Hi");
+        $this->destroy($comment);
     }
 
     /**
@@ -94,9 +95,18 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $post = Post::findOrFail($comment->post_id);
+
+        if ((int)$comment->author_id !== Auth::user()->id) {
+            return ("Nice try, you can only delete your own comments");
+        };
+
+        $comment->delete();
+
+        return redirect(route("posts.show", $post));
     }
 
     public function validateComment()

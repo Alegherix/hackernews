@@ -90,6 +90,14 @@ nav .registerNav .separator {
   padding-top: 0.5rem;
 }
 
+.fa-trash {
+  cursor: pointer;
+}
+
+.fa-trash:hover {
+  scale: 1.15;
+}
+
 .createPost h2 {
   margin-bottom: 2rem;
 }
@@ -214,7 +222,7 @@ nav .registerNav .separator {
   width: 100%;
   margin: 0 auto;
   height: 2px;
-  background-color: #444;
+  background-color: #7b8092;
   margin-bottom: 1rem;
 }
 
