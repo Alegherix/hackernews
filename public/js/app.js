@@ -2882,64 +2882,68 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-// /**
-//  * First we will load all of this project's JavaScript dependencies which
-//  * includes Vue and other libraries. It is a great starting point when
-//  * building robust, powerful web applications using Vue and Laravel.
-//  */
 var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"),
-    Axios = _require["default"]; // require('./bootstrap');
-// window.Vue = require('vue');
-// /**
-//  * The following block of code may be used to automatically register your
-//  * Vue components. It will recursively scan this directory for the Vue
-//  * components and automatically register them with their "basename".
-//  *
-//  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
-//  */
-// // const files = require.context('./', true, /\.vue$/i)
-// // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-// /**
-//  * Next, we will create a fresh Vue application instance and attach it to
-//  * the page. Then, you may begin adding components to this application
-//  * or customize the JavaScript scaffolding to fit your unique needs.
-//  */
-// const app = new Vue({
-//     el: '#app',
-// });
+    Axios = _require["default"];
 
-
-function enableDeleteComments() {
-  return _enableDeleteComments.apply(this, arguments);
+function enableUpvoteFunctionality(_x) {
+  return _enableUpvoteFunctionality.apply(this, arguments);
 }
 
-function _enableDeleteComments() {
-  _enableDeleteComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-    var deleteIcon;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+function _enableUpvoteFunctionality() {
+  _enableUpvoteFunctionality = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(id) {
+    var upvoteIcon;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context2.prev = _context2.next) {
           case 0:
-            deleteIcon = document.querySelector(".deleteCommentIcon");
+            upvoteIcon = document.querySelector(".upvoteIcon");
 
-            if (deleteIcon) {
-              deleteIcon.addEventListener("click", function () {
-                document.querySelector(".deleteCommentForm").submit();
-              });
+            if (upvoteIcon) {
+              upvoteIcon.addEventListener("click", /*#__PURE__*/function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+                  var id, res;
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          id = e.target.dataset.post_id;
+                          _context.next = 3;
+                          return fetch("api/posts/upvote", {
+                            method: "POST" // headers: {
+                            //     "Content-Type": "application/json"
+                            // },
+                            // body: {
+                            //     id
+                            // }
+
+                          });
+
+                        case 3:
+                          res = _context.sent;
+
+                        case 4:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
+
+                return function (_x2) {
+                  return _ref.apply(this, arguments);
+                };
+              }());
             }
 
           case 2:
           case "end":
-            return _context.stop();
+            return _context2.stop();
         }
       }
-    }, _callee);
+    }, _callee2);
   }));
-  return _enableDeleteComments.apply(this, arguments);
+  return _enableUpvoteFunctionality.apply(this, arguments);
 }
-
-enableDeleteComments();
 
 /***/ }),
 

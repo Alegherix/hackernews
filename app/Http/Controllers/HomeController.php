@@ -21,7 +21,12 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::all();
-
         return view("welcome", ["posts" => $posts]);
+    }
+
+    public function mostLiked()
+    {
+
+        // $posts = Post::all()->orderBy("");
     }
 }

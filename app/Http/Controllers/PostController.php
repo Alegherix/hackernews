@@ -30,7 +30,7 @@ class PostController extends Controller
         $user_id = Auth::user()->id;
 
         $post = Post::create([
-            "author_id" => $user_id,
+            "user_id" => $user_id,
             "title" => request("title"),
             "url" => request("url"),
             "body" => request("body")
@@ -46,14 +46,14 @@ class PostController extends Controller
         $allComments = Comment::all();
         $comments = $allComments->where("post_id", $post->id);
         $comments = $comments->map(function ($author) {
-            $username = User::find($author->author_id)->name;
+            $username = User::find($author->user_id)->name;
             $author["author"] = $username;
             return $author;
         });
 
         // Skapar ett nytt fält i post baserat på
         // name för authorn av posten
-        $posterName = User::find($post->author_id)->name;
+        $posterName = User::find($post->user_id)->name;
         $post["author"] = $posterName;
         $post["comment_amount"] = $comments->count();
 
@@ -68,12 +68,15 @@ class PostController extends Controller
 
     public function update(Post $post)
     {
-        // Om user_id =/ author_id så returnera att dem ej kan uppdatera andras poster
+        // Om user_id =/ user_id så returnera att dem ej kan uppdatera andras poster
         $user_id = Auth::user()->id;
-        $author_id = (int)$post->author_id;
+        $author_id = (int)$post->user_id;
+
+
 
         if ($user_id !== $author_id) {
             return ("You can only edit your own posts");
+            return redirect()->back()->withErrors([""]);
         }
 
         // Det är samma använare, och användaren är inloggad
@@ -87,11 +90,16 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        if ((int)$post->author_id !== Auth::user()->id) {
+        if ((int)$post->user_id !== Auth::user()->id) {
             return ("Nice try, you can only delete your own Posts");
         };
         $post->delete();
         return redirect(route('home'));
+    }
+
+    public function upvote()
+    {
+        return "Posted to upvote";
     }
 
     public function validatePost()

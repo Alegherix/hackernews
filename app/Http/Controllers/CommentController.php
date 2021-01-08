@@ -47,7 +47,7 @@ class CommentController extends Controller
 
         Comment::create([
             "post_id" => $post_id,
-            "author_id" => $user_id,
+            "user_id" => $user_id,
             "body" => request()->body
         ]);
 
@@ -100,7 +100,7 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $post = Post::findOrFail($comment->post_id);
 
-        if ((int)$comment->author_id !== Auth::user()->id) {
+        if ((int)$comment->user_id !== Auth::user()->id) {
             return ("Nice try, you can only delete your own comments");
         };
 
@@ -109,7 +109,8 @@ class CommentController extends Controller
         return redirect(route("posts.show", $post));
     }
 
-    public function validateComment()
-    {
-    }
+
+    // public function validateComment()
+    // {
+    // }
 }

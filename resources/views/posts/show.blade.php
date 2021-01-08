@@ -7,20 +7,22 @@
     <div class="specificPostContainer">
         <div class="postContainer">
             <div class="likesContainer">
-                <i class="fas fa-chevron-up"></i>
-                <p>100</p>
+                <i class="fas fa-chevron-up upvoteIcon" data-post_id="{{$post->id}}"></i>
+                <p class="nLikes">100</p>
             </div>
             <div class="postInfoContainer">
                 <h2 class="postTitle"><a href="{{$post->url}}">Title of the post whatever it is</a></h2>
                 <div class="infoContainer">
                     <p>Posted by: {{$post->author}}</p>
                     <p>{{$post->created_at}}</p>
-                    @if(Auth::user()->id === (int)$post->author_id)
+                    @if(Auth::user()->id === (int)$post->user_id)
                     <a href="{{ route('posts.edit', $post) }}"><i class="fas fa-edit"></i></a>
-                    <form method="POST" class="deleteCommentForm" action="/posts/{{$post->id}}">
+                    <form method="POST" class="deletePostForm" action="/posts/{{$post->id}}">
                         @method("DELETE")
                         @csrf
-                        <i class="fas fa-trash deleteCommentIcon"></i>
+                        <button class="submitBtn" type="submit">
+                            <i class="fas fa-trash deletePostIcon"></i>
+                        </button>
                     </form>
                     @endif
                 </div>
@@ -64,12 +66,14 @@
                     <p>{{$comment->author}}</p>
                     <p>{{$comment->updated_at}}</p>
                     @auth
-                    @if(Auth::user()->id == $comment->author_id)
+                    @if(Auth::user()->id == $comment->user_id)
                     <i class="fas fa-edit"></i>
                     <form method="POST" class="deleteCommentForm" action="/comments/{{$comment->id}}">
                         @method("DELETE")
                         @csrf
-                        <i class="fas fa-trash deleteCommentIcon"></i>
+                        <button class="submitBtn" type="submit">
+                            <i class="fas fa-trash deleteCommentIcon"></i>
+                        </button>
                     </form>
                     @endauth
                     @endif
