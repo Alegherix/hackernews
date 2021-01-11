@@ -5,13 +5,19 @@
 
     .submit {
         button {
-            width: 100%;
-            max-width: 414px;
-            font-size: 22px;
-            padding: 0.2rem;
+            border-radius: 5px;
+            background-color: $interestBlue;
+            padding: 0.7rem 1.1rem;
+            border: none;
+            width: 150px;
+            color: $lightSky;
+            transition: 0.2s ease;
+
+            &:hover {
+                background-color: $interestPurp;
+            }
         }
     }
-
     .errorMsg {
         color: whitesmoke;
         margin: 0.2rem 0;

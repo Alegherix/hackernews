@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -101,14 +105,17 @@ class PostController extends Controller
     {
         $likes_collection = Auth::user()->likes;
         $likedPost = $likes_collection->where("post_id", $id)->first();
+        $post = Post::find($id);
 
         if ($likedPost) {
             $likedPost->delete();
+            $post->decrement("upvotes");
         } else {
             PostLike::create([
                 "user_id" => Auth::user()->id,
                 "post_id" => $id
             ]);
+            $post->increment("upvotes");
         }
         $post = Post::find($id);
         // return redirect(route("posts.show", $post));

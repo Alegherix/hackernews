@@ -56,7 +56,7 @@
         </div>
 
         <div class="submit">
-            <button type="submit">Update Profile</button>
+            <button class=".submitBtn" type="submit">Update Profile</button>
         </div>
 
     </form>

@@ -4,29 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\PostLike;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    // /**
-    //  * Create a new controller instance.
-    //  *
-    //  * @return void
-    //  */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
 
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::all()->sortByDesc("created_at");
         return view("welcome", ["posts" => $posts]);
     }
 
-    public function mostLiked()
+    public function popular()
     {
-
-        // $posts = Post::all()->orderBy("");
+        $posts = Post::all()->sortByDesc("upvotes");
+        return view("welcome", ["posts" => $posts]);
     }
 }

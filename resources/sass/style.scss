@@ -108,3 +108,23 @@ nav {
         scale: 1.15;
     }
 }
+
+.submitBtn {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
+
+.commentBtn {
+    border-radius: 5px;
+    background-color: $interestBlue;
+    padding: 0.7rem 1.1rem;
+    border: none;
+    width: 150px;
+    color: $lightSky;
+    transition: 0.2s ease;
+
+    &:hover {
+        background-color: $interestPurp;
+    }
+}

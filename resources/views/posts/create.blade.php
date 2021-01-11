@@ -35,7 +35,7 @@
         </div>
 
         <div class="submit">
-            <button type="submit">Create Post</button>
+            <button type="submit commentBtn">Create Post</button>
         </div>
 
     </form>
