@@ -99,14 +99,20 @@ class PostController extends Controller
 
     public function upvote($id)
     {
-        PostLike::create([
-            "user_id" => Auth::user()->id,
-            "post_id" => $id
-        ]);
+        $likes_collection = Auth::user()->likes;
+        $likedPost = $likes_collection->where("post_id", $id)->first();
 
+        if ($likedPost) {
+            $likedPost->delete();
+        } else {
+            PostLike::create([
+                "user_id" => Auth::user()->id,
+                "post_id" => $id
+            ]);
+        }
         $post = Post::find($id);
-
-        return redirect(route("posts.show", $post));
+        // return redirect(route("posts.show", $post));
+        return back();
     }
 
     public function test()

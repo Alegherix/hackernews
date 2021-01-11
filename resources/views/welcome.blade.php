@@ -12,8 +12,11 @@
     @foreach ($posts as $post)
     <section class="welcomeSection">
         <div class="likesContainer">
-            <i class="fas fa-chevron-up"></i>
-            <p>100</p>
+            <form method="POST" action="/posts/{{$post->id}}/upvote">
+                @csrf
+                <button class="submitBtn" type="submit"><i class="fas fa-chevron-up upvoteIcon"></i></button>
+            </form>
+            <p>{{$post->likes->count()}}</p>
         </div>
         <div class="postInfoContainer">
             <div class="titleContainer">

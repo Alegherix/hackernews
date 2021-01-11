@@ -9,10 +9,10 @@
             <div class="likesContainer">
                 <form method="POST" action="/posts/{{$post->id}}/upvote">
                     @csrf
-                    <button type="submit"><i class="fas fa-chevron-up upvoteIcon"></i></button>
+                    <button class="submitBtn" type="submit"><i class="fas fa-chevron-up upvoteIcon"></i></button>
                 </form>
 
-                <p class="nLikes">100</p>
+                <p class="nLikes">{{$post->likes->count()}}</p>
             </div>
             <div class="postInfoContainer">
                 <h2 class="postTitle"><a href="{{$post->url}}">{{$post->title}}</a></h2>
