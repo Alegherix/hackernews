@@ -9,11 +9,7 @@
     <div class="profileContainer">
         <p>Profile Avatar</p>
         <div class="avatar">
-            @if (Auth::user()->avatar)
             <img class="avatarImg" src="{{ asset($user->avatar) }}">
-            @else
-            <img class="avatarImg" src="{{ asset('images/defImg.png') }}">
-            @endif
         </div>
     </div>
 
@@ -56,7 +52,7 @@
         </div>
 
         <div class="submit">
-            <button class=".submitBtn" type="submit">Update Profile</button>
+            <button class="commentBtn" type="submit">Update Profile</button>
         </div>
 
     </form>

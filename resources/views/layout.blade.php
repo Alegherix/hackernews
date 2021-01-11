@@ -22,8 +22,8 @@
             </a>
             <section class="posts">
                 <ul>
-                    <li><a href="">Popular</a></li>
-                    <li><a href="">Newest</a></li>
+                    <li><a href="{{route('popular')}}">Popular</a></li>
+                    <li><a href="{{route('welcome')}}">Newest</a></li>
                 </ul>
             </section>
             <ul class="registerNav">

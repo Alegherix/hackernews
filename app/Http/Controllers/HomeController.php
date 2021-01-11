@@ -13,12 +13,15 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::all()->sortByDesc("created_at");
-        return view("welcome", ["posts" => $posts]);
+        return view("welcome", [
+            "posts" => $posts,
+            "banner" => "Newest Posts"
+        ]);
     }
 
     public function popular()
     {
         $posts = Post::all()->sortByDesc("upvotes");
-        return view("welcome", ["posts" => $posts]);
+        return view("welcome", ["posts" => $posts, "banner" => "Most Popular Posts"]);
     }
 }

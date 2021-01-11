@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name("welcome");
+Route::get('/home', [HomeController::class, 'index'])->name("welcome");
 Route::get('/popular', [HomeController::class, 'popular'])->name('popular');
 
 Route::get("/posts", [PostController::class, "index"]);
