@@ -37,6 +37,12 @@ nav .logo {
   font-weight: bold;
 }
 
+nav .posts ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+
 nav .registerNav {
   list-style: none;
   display: flex;
@@ -276,6 +282,16 @@ nav .registerNav .separator {
   border-radius: 10px;
 }
 
+.info {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.info .likedContainer {
+  display: flex;
+}
+
 .welcomeSection {
   display: flex;
   align-items: center;
@@ -303,5 +319,19 @@ nav .registerNav .separator {
 
 .welcomeSection .postInfoContainer .postDescContainer p {
   margin-right: 2rem;
+}
+
+.commentBtn {
+  border-radius: 5px;
+  background-color: #303955;
+  padding: 0.7rem 1.1rem;
+  border: none;
+  width: 150px;
+  color: #e5e8ee;
+  transition: 0.2s ease;
+}
+
+.commentBtn:hover {
+  background-color: #232b41;
 }
 

@@ -27,6 +27,8 @@
             <button type="submit">Update post</button>
         </div>
 
+
+
     </form>
 </section>
 @endsection

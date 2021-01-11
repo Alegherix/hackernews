@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\PostLike;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +74,6 @@ class PostController extends Controller
         $author_id = (int)$post->user_id;
 
 
-
         if ($user_id !== $author_id) {
             return ("You can only edit your own posts");
             return redirect()->back()->withErrors([""]);
@@ -97,9 +97,25 @@ class PostController extends Controller
         return redirect(route('home'));
     }
 
-    public function upvote()
+    public function upvote($id)
     {
-        return "Posted to upvote";
+        PostLike::create([
+            "user_id" => Auth::user()->id,
+            "post_id" => $id
+        ]);
+
+        $post = Post::find($id);
+
+        return redirect(route("posts.show", $post));
+    }
+
+    public function test()
+    {
+    }
+
+    public function getLike()
+    {
+        return ["a", "b", "c"];
     }
 
     public function validatePost()

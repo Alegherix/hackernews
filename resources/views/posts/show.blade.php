@@ -7,14 +7,19 @@
     <div class="specificPostContainer">
         <div class="postContainer">
             <div class="likesContainer">
-                <i class="fas fa-chevron-up upvoteIcon" data-post_id="{{$post->id}}"></i>
+                <form method="POST" action="/posts/{{$post->id}}/upvote">
+                    @csrf
+                    <button type="submit"><i class="fas fa-chevron-up upvoteIcon"></i></button>
+                </form>
+
                 <p class="nLikes">100</p>
             </div>
             <div class="postInfoContainer">
-                <h2 class="postTitle"><a href="{{$post->url}}">Title of the post whatever it is</a></h2>
+                <h2 class="postTitle"><a href="{{$post->url}}">{{$post->title}}</a></h2>
                 <div class="infoContainer">
                     <p>Posted by: {{$post->author}}</p>
                     <p>{{$post->created_at}}</p>
+                    @auth
                     @if(Auth::user()->id === (int)$post->user_id)
                     <a href="{{ route('posts.edit', $post) }}"><i class="fas fa-edit"></i></a>
                     <form method="POST" class="deletePostForm" action="/posts/{{$post->id}}">
@@ -25,11 +30,12 @@
                         </button>
                     </form>
                     @endif
+                    @endauth
                 </div>
             </div>
         </div>
         <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque qui, aperiam architecto saepe, fugiat eum suscipit dicta facilis, reiciendis assumenda quibusdam! Inventore unde fuga blanditiis molestiae laborum obcaecati eligendi fugiat, maiores a nostrum porro animi iste? Magnam laudantium commodi aspernatur!
+            {{$post->body}}
         </p>
         <!-- Gör de enbart tillgängligt att posta för inloggade users -->
         @auth
@@ -43,7 +49,7 @@
             @csrf
             <div class="field">
                 <label for="body"></label>
-                <textarea class="commentArea" name="body" id="body" placeholder="What are your thought?"></textarea>
+                <textarea class="commentArea" name="body" id="body" placeholder="What are your thoughts?"></textarea>
 
                 @error("body")
                 <p class="errorMsg">{{$message}}</p>
@@ -75,8 +81,8 @@
                             <i class="fas fa-trash deleteCommentIcon"></i>
                         </button>
                     </form>
-                    @endauth
                     @endif
+                    @endauth
                 </div>
                 <div class="commentBodySection">
                     <p>{{$comment->body}}</p>

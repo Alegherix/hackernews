@@ -20,6 +20,12 @@
             <a href="{{route('welcome')}}">
                 <p class="logo">Hackernews</p>
             </a>
+            <section class="posts">
+                <ul>
+                    <li><a href="">Popular</a></li>
+                    <li><a href="">Newest</a></li>
+                </ul>
+            </section>
             <ul class="registerNav">
                 @guest
                 @if (Route::has('login'))

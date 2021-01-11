@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
+// Route::middleware('auth:api')->post("/posts/like", [PostController::class, "upvote"]);
+// Route::get("/posts/like", [PostController::class, "getLike"]);
 
-Route::middleware('auth:api')->post("/posts/{post}/upvote", [PostController::class, "upvote"])->name("posts.upvote");
+// Route::group(['middleware' => 'auth:api'], function () {
 
-Route::middleware('auth:api')->get('/posts/upvote', function (Request $request) {
-    return $request->user();
-});
+// });
+
+Route::post("/posts/like", [PostController::class, "upvote"]);

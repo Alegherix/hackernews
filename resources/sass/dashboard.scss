@@ -1,3 +1,13 @@
+.info {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+
+    .likedContainer {
+        display: flex;
+    }
+}
+
 .welcomeSection {
     display: flex;
     align-items: center;
@@ -23,5 +33,19 @@
                 margin-right: 2rem;
             }
         }
+    }
+}
+
+.commentBtn {
+    border-radius: 5px;
+    background-color: $interestBlue;
+    padding: 0.7rem 1.1rem;
+    border: none;
+    width: 150px;
+    color: $lightSky;
+    transition: 0.2s ease;
+
+    &:hover {
+        background-color: $interestPurp;
     }
 }

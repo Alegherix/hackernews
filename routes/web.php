@@ -27,12 +27,13 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get("/posts", [PostController::class, "index"]);
 Route::post("/posts", [PostController::class, "store"]);
-Route::get("/posts/create", [PostController::class, "create"]);
+Route::get("/posts/create", [PostController::class, "create"])->name("posts.create");
 Route::get("/posts/{post}", [PostController::class, "show"])->name("posts.show");
 Route::put("/posts/{post}", [PostController::class, "update"]);
 Route::get("/posts/{post}/edit", [PostController::class, "edit"])->name("posts.edit");
-
 Route::delete("/posts/{id}", [PostController::class, "destroy"])->name("posts.destroy");
+
+Route::post("/posts/{id}/upvote", [PostController::class, "upvote"]);
 
 Route::put("/settings", [UserController::class, "update"]);
 Route::get("/settings", [UserController::class, "edit"])->name("settings");
