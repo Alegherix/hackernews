@@ -10,7 +10,7 @@ async function enableUpvoteFunctionality() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    credentials: 'include'
+                    "credentials": 'include'
                 },
                 body: JSON.stringify({ name: 'Eka', isHungry: true, "post_id": postId})
             });

@@ -11,8 +11,10 @@
                     @csrf
                     <button class="submitBtn" type="submit"><i class="fas fa-chevron-up upvoteIcon"></i></button>
                 </form>
-
                 <p class="nLikes">{{$post->likes->count()}}</p>
+            </div>
+            <div class="avatarContainer">
+                <img class="avatar" src="{{ asset($post->user->avatar) }}">
             </div>
             <div class="postInfoContainer">
                 <h2 class="postTitle"><a href="{{$post->url}}">{{$post->title}}</a></h2>
@@ -64,8 +66,7 @@
         @foreach ($comments as $comment)
         <div class="commentContainer">
             <div class="likesContainer">
-                <i class="fas fa-chevron-up"></i>
-                <p>100</p>
+                <img class="avatar" src="{{ asset($post->user->avatar) }}">
             </div>
             <div class="comment">
                 <div class="commentInfoContainer">

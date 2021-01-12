@@ -36,11 +36,14 @@
         margin-bottom: 1rem;
 
         .likesContainer {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 0.5rem;
+            // display: flex;
+            // flex-direction: column;
+            // justify-content: space-between;
+            // align-items: center;
+            // padding-top: 0.5rem;
+            // justify-self: center;
+            // align-self: center;
+            height: 40px;
         }
 
         h2 {
@@ -117,12 +120,6 @@
         width: 100%;
         gap: 1rem;
         margin-bottom: 2rem;
-
-        .likesContainer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
 
         .comment {
             width: 100%;
