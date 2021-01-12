@@ -34,7 +34,7 @@ class UserController extends Controller
 
     public function update(User $user)
     {
-        // Validera inputs 
+        // Validera inputs
         $validatedUser = $this->validateUser();
 
         // Fetcha den inloggade användaren och uppdatera dennes fält

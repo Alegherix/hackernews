@@ -1,0 +1,17 @@
+name: CI
+
+on: [push]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    name: Tests
+    steps:
+      - uses: actions/checkout@v2
+      - run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - run: composer install --prefer-dist --no-interaction
+      - run: php artisan key:generate
+      - run: chmod -R 777 storage bootstrap/cache
+      - run: vendor/bin/phpunit --verbose
+      - run: vendor/bin/phpunit --verbose
+      - run: vendor/bin/phpcs --standard=PSR12 --colors -n app config routes database tests
