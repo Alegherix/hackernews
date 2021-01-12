@@ -42,4 +42,5 @@ Route::get("/users/{id}", [UserController::class, "show"]);
 
 
 Route::post("/comments/{post}", [CommentController::class, "store"]);
+Route::put("/comments/{id}", [CommentController::class, "update"]);
 Route::delete("/comments/{id}", [CommentController::class, "destroy"])->name("comment.destroy");

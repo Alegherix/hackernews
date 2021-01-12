@@ -4,7 +4,7 @@
 <main>
     <h1 class="banner">{{$banner}}</h1>
     <section class="info">
-        <button class="commentBtn"><a href="{{route('posts.create')}}">Create Post</a></button>
+        <a class="routeBtn" href="{{route('posts.create')}}"><button class="commentBtn">Create Post</button></a>
     </section>
     @foreach ($posts as $post)
     <section class="welcomeSection">

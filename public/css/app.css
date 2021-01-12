@@ -13,6 +13,7 @@ body {
 a {
   color: #e5e8ee;
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover {
@@ -126,6 +127,7 @@ nav .registerNav .separator {
 
 .commentBtn:hover {
   background-color: #232b41;
+  cursor: pointer;
 }
 
 .banner {
@@ -171,6 +173,7 @@ nav .registerNav .separator {
 
 .createPost .submit button:hover {
   background-color: #232b41;
+  cursor: pointer;
 }
 
 .createPost .errorMsg {
@@ -261,6 +264,7 @@ nav .registerNav .separator {
 
 .specificPostContainer .field .commentBtn:hover {
   background-color: #232b41;
+  cursor: pointer;
 }
 
 .specificPostContainer .separator {
@@ -285,10 +289,15 @@ nav .registerNav .separator {
   align-items: center;
 }
 
+.specificPostContainer .commentContainer .comment {
+  width: 100%;
+}
+
 .specificPostContainer .commentContainer .comment .commentInfoContainer {
   display: flex;
   align-items: center;
   margin: 0 1.5rem 0 0;
+  width: 350px;
 }
 
 .specificPostContainer .commentContainer .comment .commentInfoContainer p,
@@ -300,6 +309,20 @@ nav .registerNav .separator {
   border: none;
   background-color: transparent;
   width: 100%;
+}
+
+.updateCommentForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.updateCommentForm .commentArea {
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+  width: 50%;
+  height: 80px;
+  border-radius: 5px;
+  padding: 0.4rem;
 }
 
 .settings h2 {
@@ -385,5 +408,9 @@ nav .registerNav .separator {
 
 .welcomeSection .postInfoContainer .postDescContainer p {
   margin-right: 2rem;
+}
+
+.hide {
+  display: none;
 }
 

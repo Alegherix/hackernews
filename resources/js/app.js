@@ -22,3 +22,13 @@ async function enableUpvoteFunctionality() {
 enableUpvoteFunctionality();
 
   
+function enableEditPost(){
+    document.querySelectorAll(".editComment").forEach(elem => {
+        elem.addEventListener("click", e => {
+            const container = elem.parentNode.parentNode;
+            container.querySelector(".commentParagraph").classList.toggle("hide");
+            container.querySelector(".updateCommentForm").classList.toggle("hide");
+        })
+    })
+}
+enableEditPost();

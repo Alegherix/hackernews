@@ -11832,6 +11832,18 @@ function _enableUpvoteFunctionality() {
 
 enableUpvoteFunctionality();
 
+function enableEditPost() {
+  document.querySelectorAll(".editComment").forEach(function (elem) {
+    elem.addEventListener("click", function (e) {
+      var container = elem.parentNode.parentNode;
+      container.querySelector(".commentParagraph").classList.toggle("hide");
+      container.querySelector(".updateCommentForm").classList.toggle("hide");
+    });
+  });
+}
+
+enableEditPost();
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":

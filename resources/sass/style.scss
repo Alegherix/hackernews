@@ -13,6 +13,7 @@ body {
 a {
     color: $lightSky;
     text-decoration: none;
+    cursor: pointer;
 
     &:hover {
         text-decoration: underline;
@@ -126,6 +127,7 @@ nav {
 
     &:hover {
         background-color: $interestPurp;
+        cursor: pointer;
     }
 }
 

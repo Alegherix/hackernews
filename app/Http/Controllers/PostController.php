@@ -80,7 +80,7 @@ class PostController extends Controller
 
         if ($user_id !== $author_id) {
             return ("You can only edit your own posts");
-            return redirect()->back()->withErrors([""]);
+            // return redirect()->back()->withErrors([""]);
         }
 
         // Det är samma använare, och användaren är inloggad

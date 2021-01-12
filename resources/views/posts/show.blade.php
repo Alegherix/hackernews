@@ -73,7 +73,7 @@
                     <p>{{$comment->updated_at}}</p>
                     @auth
                     @if(Auth::user()->id == $comment->user_id)
-                    <i class="fas fa-edit"></i>
+                    <i class="editComment fas fa-edit"></i>
                     <form method="POST" class="deleteCommentForm" action="/comments/{{$comment->id}}">
                         @method("DELETE")
                         @csrf
@@ -85,7 +85,15 @@
                     @endauth
                 </div>
                 <div class="commentBodySection">
-                    <p>{{$comment->body}}</p>
+                    <p class="commentParagraph">{{$comment->body}}</p>
+                    <form method="POST" class="updateCommentForm hide" action="/comments/{{$comment->id}}">
+                        @method("PUT")
+                        @csrf
+                        <textarea class="commentArea" name="body" id="body">{{$comment->body}}</textarea>
+                        <button class="commentBtn" type="submit">
+                            Update post
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
