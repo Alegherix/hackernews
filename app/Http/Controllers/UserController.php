@@ -67,11 +67,6 @@ class UserController extends Controller
         return view("users.edit", compact("user"));
     }
 
-    public function updateAvatar()
-    {
-        die(var_dump(request()->all()));
-    }
-
     public function validateUser()
     {
         return request()->validate([

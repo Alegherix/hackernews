@@ -66,20 +66,22 @@ php artisan serve
 ```
 
 ## Code Review - Daniel Borgström
+
 1. I would suggest using Policies(https://laravel.com/docs/8.x/authorization#generating-policies)
 2. updateAvatar in UserController.php returns die dump.
 3. PostController and CommentController both uses CRUD. I would suggest Route::resource
 4. show in CommentController can be manipulated so a user can delete someone else's comment.
-5. When updating database. Instead or writing every single field you can write $request->al()
+5. When updating database. Instead or writing every single field you can write \$request->al()
 6. Many views uses the same output. Components will make it look better. (https://laravel.com/docs/8.x/blade#rendering-components)
 7. Some comments in the code are in swedish and some in english.
 8. I would suggest using Paginate for the posts. (https://laravel.com/docs/8.x/pagination)
 9. And eager loading (https://laravel.com/docs/8.x/eloquent-relationships#eager-loading)
 10. Overall nicely clean code!
 
-
 ## Testing Done By
 
+Daniel Borgström
+Evelyn Fredin
 
 ## License
 
