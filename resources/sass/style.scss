@@ -25,45 +25,27 @@ i {
 }
 
 nav {
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     display: flex;
     justify-content: space-between;
     background-color: $interestBlue;
     align-items: center;
-    color: white;
 
     .logo {
         font-size: 22px;
         font-weight: bold;
     }
 
-    .posts {
-        ul {
-            display: flex;
-            list-style: none;
-            gap: 1rem;
-        }
-    }
-
-    .registerNav {
+    ul,
+    .userContainer {
         list-style: none;
         display: flex;
-        gap: 1rem;
+        flex-direction: column;
+    }
 
-        a {
-            padding: 0.5rem;
-        }
-
-        .userContainer {
-            display: flex;
-            align-items: center;
-        }
-
-        .separator {
-            height: 15px;
-            width: 2px;
-            background-color: white;
-        }
+    ul li,
+    .userContainer a {
+        padding: 0.4rem;
     }
 }
 

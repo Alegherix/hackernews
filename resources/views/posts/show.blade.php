@@ -8,7 +8,7 @@
                     @csrf
                     <button class="submitBtn" type="submit"><i class="fas fa-chevron-up upvoteIcon"></i></button>
                 </form>
-                <p class="nLikes">{{$post->likes->count()}}</p>
+                <p class="nLikes">{{$post->upvotes}}</p>
             </div>
             <div class="avatarContainer">
                 <img class="avatar" src="{{ asset($post->user->avatar) }}">
@@ -63,12 +63,12 @@
         @foreach ($comments as $comment)
         <div class="commentContainer">
             <div class="likesContainer">
-                <img class="avatar" src="{{ asset($post->user->avatar) }}">
+                <img class="avatar" src="{{ asset($comment->user->avatar) }}">
             </div>
             <div class="comment">
                 <div class="commentInfoContainer">
                     <p>{{$comment->author}}</p>
-                    <p>{{$comment->updated_at}}</p>
+                    <p>{{$comment->updated_at->format("d/m/Y-H:i")}}</p>
                     @auth
                     @if(Auth::user()->id == $comment->user_id)
                     <i class="editComment fas fa-edit"></i>

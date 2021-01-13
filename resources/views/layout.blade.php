@@ -20,12 +20,14 @@
             <a href="{{route('welcome')}}">
                 <p class="logo">Hackernews</p>
             </a>
-            <section class="posts">
-                <ul>
-                    <li><a href="{{route('popular')}}">Popular</a></li>
-                    <li><a href="{{route('welcome')}}">Newest</a></li>
-                </ul>
-            </section>
+            <!-- <section class="posts"> -->
+
+            <ul>
+                <li><a href="{{route('popular')}}">Popular</a></li>
+                <li><a href="{{route('welcome')}}">Newest</a></li>
+            </ul>
+
+
             <ul class="registerNav">
                 @guest
                 @if (Route::has('login'))
@@ -45,7 +47,6 @@
                         <a class="" href="{{ route('settings') }}" v-pre>
                             {{ Auth::user()->name }}
                         </a>
-                        <div class="separator"></div>
 
                         <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -59,8 +60,8 @@
                     </div>
                 </li>
                 @endguest
-
             </ul>
+            <!-- </section> -->
         </nav>
     </header>
     <main class="content">

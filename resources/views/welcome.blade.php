@@ -13,7 +13,7 @@
                 @csrf
                 <button class="submitBtn" type="submit"><i class="fas fa-chevron-up upvoteIcon"></i></button>
             </form>
-            <p>{{$post->likes->count()}}</p>
+            <p>{{$post->upvotes}}</p>
         </div>
         <div class="imageContainer">
             <img class="avatarImg" src="{{ asset($post->user->avatar) }}">
@@ -25,7 +25,7 @@
                 </a>
             </div>
             <div class="postDescContainer">
-                <p>Posted by {{$post->author_id}}</p>
+                <p>Posted by {{$post->user->name}}</p>
                 <p>{{$post->created_at}}</p>
             </div>
         </div>

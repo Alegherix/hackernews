@@ -62,7 +62,6 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        return ("Hi");
         $this->destroy($comment);
     }
 
@@ -117,9 +116,4 @@ class CommentController extends Controller
 
         return redirect(route("posts.show", $post));
     }
-
-
-    // public function validateComment()
-    // {
-    // }
 }
