@@ -77,10 +77,8 @@ class PostController extends Controller
         $user_id = Auth::user()->id;
         $author_id = (int)$post->user_id;
 
-
         if ($user_id !== $author_id) {
             return ("You can only edit your own posts");
-            // return redirect()->back()->withErrors([""]);
         }
 
         // Det är samma använare, och användaren är inloggad
@@ -98,7 +96,7 @@ class PostController extends Controller
             return ("Nice try, you can only delete your own Posts");
         };
         $post->delete();
-        return redirect(route('home'));
+        return redirect(route('welcome'));
     }
 
     public function upvote($id)
@@ -117,7 +115,7 @@ class PostController extends Controller
             ]);
             $post->increment("upvotes");
         }
-        $post = Post::find($id);
+        // $post = Post::find($id);
         // return redirect(route("posts.show", $post));
         return back();
     }

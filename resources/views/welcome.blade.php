@@ -7,7 +7,7 @@
         <a class="routeBtn" href="{{route('posts.create')}}"><button class="commentBtn">Create Post</button></a>
     </section>
     @foreach ($posts as $post)
-    <section class="welcomeSection">
+    <article class="welcomeSection">
         <div class="likesContainer">
             <form method="POST" action="/posts/{{$post->id}}/upvote">
                 @csrf
@@ -29,7 +29,7 @@
                 <p>{{$post->created_at}}</p>
             </div>
         </div>
-    </section>
+    </article>
     @endforeach
 </main>
 @endsection

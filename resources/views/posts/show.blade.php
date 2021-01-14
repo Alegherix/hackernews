@@ -61,7 +61,7 @@
         <div class="separator"></div>
         <!-- Här behöver vi en Collection Loop baserat på Alla kommentarer för posten -->
         @foreach ($comments as $comment)
-        <div class="commentContainer">
+        <article class="commentContainer">
             <div class="likesContainer">
                 <img class="avatar" src="{{ asset($comment->user->avatar) }}">
             </div>
@@ -94,7 +94,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </article>
 
         @endforeach
     </div>
