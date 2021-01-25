@@ -57,7 +57,11 @@ When you're ready you can:
   composer install
 ```
 
-4. Change the DB_DATABASE variable in the .env file to the absolute path of the database in database/database.sqlite
+4. Set up environment
+```bash
+  cp .env.example .env
+  php artisan key:generate
+```
 
 5. Start the server
 
