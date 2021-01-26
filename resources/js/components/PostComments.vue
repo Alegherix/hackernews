@@ -1,6 +1,7 @@
 <template>
   <div>
-    <p>HEY 👋</p>
+    <p class="text-red-500">Hej hej</p>
+    <p class="text-red-500">I wanna be red with tailwind</p>
   </div>
 </template>
 
