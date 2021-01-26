@@ -1,8 +1,11 @@
 require('./bootstrap');
 
 import Vue from 'vue'
+import VueResource from 'vue-resource';
 
 window.Vue = require('vue').default;
+Vue.use(VueResource);
+require('vue-resource');
 
 Vue.component('hello-world', require('./components/HelloWorld.vue').default);
 Vue.component('post-comments', require('./components/PostComments.vue').default);
@@ -20,7 +23,7 @@ const app = new Vue({
 //     const postId = upvoteIcon.dataset.post_id;
 
 //     if (upvoteIcon) {
-//         upvoteIcon.addEventListener("click", async e => {     
+//         upvoteIcon.addEventListener("click", async e => {
 //             const res = await fetch("/api/posts/like", {
 //                 method: "POST",
 //                 headers: {
@@ -36,7 +39,7 @@ const app = new Vue({
 // }
 // enableUpvoteFunctionality();
 
-  
+
 // function enableEditPost(){
 //     document.querySelectorAll(".editComment").forEach(elem => {
 //         elem.addEventListener("click", e => {
