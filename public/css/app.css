@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);* {
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -15,7 +16,6 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
-
 a:hover {
   text-decoration: underline;
 }
@@ -31,19 +31,16 @@ nav {
   background-color: #303955;
   align-items: center;
 }
-
 nav .logo {
   font-size: 22px;
   font-weight: bold;
 }
-
 nav ul,
 nav .userContainer {
   list-style: none;
   display: flex;
   flex-direction: column;
 }
-
 nav ul li,
 nav .userContainer a {
   padding: 0.4rem;
@@ -55,18 +52,15 @@ nav .userContainer a {
   flex-direction: column;
   margin-bottom: 1rem;
 }
-
 .field label {
   margin-bottom: 0.3rem;
 }
-
 .field input,
 .field textarea {
   border-radius: 5px;
   border: none;
   padding: 0.4rem;
 }
-
 .field input {
   height: 40px;
 }
@@ -88,7 +82,6 @@ nav .userContainer a {
 .fa-trash {
   cursor: pointer;
 }
-
 .fa-trash:hover {
   scale: 1.15;
 }
@@ -108,7 +101,6 @@ nav .userContainer a {
   color: #e5e8ee;
   transition: 0.2s ease;
 }
-
 .commentBtn:hover {
   background-color: #232b41;
   cursor: pointer;
@@ -135,14 +127,12 @@ nav .userContainer a {
   gap: 1rem;
   margin-top: 3rem;
 }
-
 .auth input {
   border-radius: 5px;
   height: 30px;
   width: 200px;
   padding: 0.2rem;
 }
-
 .auth .formGroup {
   margin-bottom: 1rem;
 }
@@ -150,7 +140,6 @@ nav .userContainer a {
 .createPost h2 {
   margin-bottom: 2rem;
 }
-
 .createPost .submit button {
   border-radius: 5px;
   background-color: #303955;
@@ -160,84 +149,68 @@ nav .userContainer a {
   color: #e5e8ee;
   transition: 0.2s ease;
 }
-
 .createPost .submit button:hover {
   background-color: #232b41;
   cursor: pointer;
 }
-
 .createPost .errorMsg {
   color: whitesmoke;
   margin: 0.2rem 0;
 }
-
 .specificPostContainer .postContainer {
   display: flex;
   gap: 1rem;
   font-size: 14px;
   margin-bottom: 1rem;
 }
-
 .specificPostContainer .postContainer .likesContainer {
   height: 40px;
 }
-
 .specificPostContainer .postContainer h2 {
   font-size: 26px;
 }
-
 .specificPostContainer .postContainer h2 a {
   color: #75f581;
 }
-
 @media screen and (min-width: 768px) {
   .specificPostContainer .postContainer h2 {
     font-size: 24px;
   }
 }
-
 @media screen and (min-width: 968) {
   .specificPostContainer .postContainer h2 {
     font-size: 50px;
   }
 }
-
 .specificPostContainer .postContainer .infoContainer {
   display: flex;
   min-width: 300px;
   justify-content: space-between;
 }
-
 .specificPostContainer .postContainer .infoContainer p {
   margin-right: 1.5rem;
 }
-
 .specificPostContainer .postContainer .infoContainer a {
   margin-right: 1.2rem;
 }
-
 .specificPostContainer .postContainer .infoContainer a:hover {
   scale: 1.15;
   cursor: pointer;
 }
-
 .specificPostContainer .commentInfoContainer {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin-top: 1rem;
 }
-
 .specificPostContainer .field {
   width: 100%;
 }
-
 .specificPostContainer .field .commentArea {
   margin-bottom: 1rem;
   width: 100%;
   height: 150px;
 }
-
 .specificPostContainer .field .commentBtn {
   border-radius: 5px;
   background-color: #303955;
@@ -247,19 +220,16 @@ nav .userContainer a {
   color: #e5e8ee;
   transition: 0.2s ease;
 }
-
 .specificPostContainer .field .commentBtn:hover {
   background-color: #232b41;
   cursor: pointer;
 }
-
 .specificPostContainer .separator {
   width: 100%;
   height: 1px;
   background-color: #7b8092;
   margin: 1.7rem 0;
 }
-
 .specificPostContainer .commentContainer {
   display: flex;
   flex-direction: row;
@@ -268,18 +238,15 @@ nav .userContainer a {
   gap: 1rem;
   margin-bottom: 2rem;
 }
-
 .specificPostContainer .commentContainer .comment {
   width: 100%;
 }
-
 .specificPostContainer .commentContainer .comment .commentInfoContainer {
   display: flex;
   align-items: center;
   margin: 0 1.5rem 0 0;
   max-width: 350px;
 }
-
 .specificPostContainer .commentContainer .comment .commentInfoContainer p,
 .specificPostContainer .commentContainer .comment .commentInfoContainer i {
   margin-right: 0.7rem;
@@ -295,7 +262,6 @@ nav .userContainer a {
   display: flex;
   flex-direction: column;
 }
-
 .updateCommentForm .commentArea {
   margin-top: 0.4rem;
   margin-bottom: 0.4rem;
@@ -304,7 +270,6 @@ nav .userContainer a {
   border-radius: 5px;
   padding: 0.4rem;
 }
-
 @media screen and (min-width: 690px) {
   .updateCommentForm .commentArea {
     width: 50%;
@@ -314,7 +279,6 @@ nav .userContainer a {
 .settings h2 {
   margin-bottom: 0.5rem;
 }
-
 .settings .separator {
   width: 100%;
   margin: 0 auto;
@@ -322,11 +286,9 @@ nav .userContainer a {
   background-color: #7b8092;
   margin-bottom: 1rem;
 }
-
 .settings .profileContainer {
   margin-bottom: 1rem;
 }
-
 .settings .profileContainer .avatar {
   width: 145px;
   height: 145px;
@@ -334,11 +296,9 @@ nav .userContainer a {
   background-color: #aaa;
   margin: 0.5rem 0;
 }
-
 .settings form .avatarInputContainer {
   margin-bottom: 1rem;
 }
-
 .settings .avatarImg {
   width: 100%;
   height: 100%;
@@ -350,7 +310,6 @@ nav .userContainer a {
   justify-content: space-between;
   padding: 1rem 0;
 }
-
 .info .likedContainer {
   display: flex;
 }
@@ -364,34 +323,28 @@ nav .userContainer a {
   gap: 1rem;
   padding: 0.5rem;
 }
-
 .welcomeSection .imageContainer {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .welcomeSection .imageContainer img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
-
 .welcomeSection .postInfoContainer {
   display: flex;
   flex-direction: column;
   flex: 2;
 }
-
 .welcomeSection .postInfoContainer .titleContainer {
   font-size: 22px;
 }
-
 .welcomeSection .postInfoContainer .postDescContainer {
   font-size: 14px;
   display: flex;
 }
-
 .welcomeSection .postInfoContainer .postDescContainer p {
   margin-right: 2rem;
 }
@@ -399,4 +352,3 @@ nav .userContainer a {
 .hide {
   display: none;
 }
-
