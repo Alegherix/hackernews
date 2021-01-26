@@ -46,7 +46,7 @@ When you're ready you can:
 1. Clone this repo
 
 ```bash
-  git clone https://github.com/Alegherix/hackernews.git
+git clone https://github.com/Alegherix/hackernews.git
 ```
 
 2. Change directory to hackernews
@@ -54,13 +54,13 @@ When you're ready you can:
 3. Install dependencies
 
 ```bash
-  composer install
+composer install
 ```
 
 4. Set up environment
 ```bash
-  cp .env.example .env
-  php artisan key:generate
+cp .env.example .env
+php artisan key:generate
 ```
 
 5. Start the server
