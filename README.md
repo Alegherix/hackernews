@@ -69,6 +69,20 @@ php artisan key:generate
 php artisan serve
 ```
 
+<details>
+<summary>Setting up for development</summary>
+```
+git clone https://github.com/felixgren/hacker-news.git
+cd hacker-news
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan serve --port=8080
+npm run watch
+```
+</details>
+
 ## Code Review - Daniel Borgström
 
 1. I would suggest using Policies(https://laravel.com/docs/8.x/authorization#generating-policies)
