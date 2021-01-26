@@ -1,13 +1,7 @@
 @extends("layout")
 @section("content")
 <section>
-    <p>hej hej vue</p>
-
-    <div id="app">
-        <post-comments></post-comments>
-    </div>
-
-    {{-- <div class="specificPostContainer">
+    <div class="specificPostContainer">
         <div class="postContainer">
             <div class="likesContainer">
                 <form method="POST" action="/posts/{{$post->id}}/upvote">
@@ -105,7 +99,7 @@
         @endforeach
     </div>
 
-    <script src="/js/app.js"></script> --}}
+    <script src="/js/app.js"></script>
 </section>
 
 @endsection
