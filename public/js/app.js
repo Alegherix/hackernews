@@ -1881,10 +1881,127 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      comments: []
+      comments: [],
+      // Will store comments of instance
+      body: null,
+      // Post comment body
+      replyBody: null,
+      editBody: null,
+      replyFormVisible: null,
+      errors: [],
+      // Will store validation errors
+      editFormVisible: null
     };
   },
   props: {
@@ -1897,6 +2014,139 @@ __webpack_require__.r(__webpack_exports__);
       this.$http.get("/posts/".concat(this.postId, "/comments")).then(function (response) {
         _this.comments = response.body.data;
       });
+    },
+    createComment: function createComment() {
+      var _this2 = this;
+
+      this.$http.post("/posts/".concat(this.postId, "/comments"), {
+        body: this.body
+      }).then(function (response) {
+        _this2.comments.unshift(response.data.data);
+
+        _this2.body = null; // Clear comment content from input field
+
+        _this2.errors = null; // Clear error message
+      }, function (response) {
+        console.log('NOPE');
+      });
+    },
+    createReply: function createReply(commentId) {
+      var _this3 = this;
+
+      console.log(commentId);
+      this.$http.post("/posts/".concat(this.postId, "/comments"), {
+        body: this.replyBody,
+        reply_id: commentId
+      }).then(function (response) {
+        _this3.comments.map(function (comment, index) {
+          if (comment.id === commentId) {
+            _this3.comments[index].replies.data.push(response.data.data);
+          }
+        });
+
+        _this3.replyBody = null;
+        _this3.replyFormVisible = null; // Close reply window
+
+        _this3.errors = null;
+      }, function (response) {
+        _this3.errors = response.body.errors.body;
+      });
+    },
+    toggleReplyForm: function toggleReplyForm(commentId) {
+      this.replyBody = null; // Check if selected form is the current open and close if true
+      // Others handled by v-if in template: line 44
+
+      if (this.replyFormVisible === commentId) {
+        this.replyFormVisible = null;
+        return;
+      }
+
+      ;
+      this.replyFormVisible = commentId;
+    },
+    deleteComment: function deleteComment(commentId) {
+      if (!confirm('You sure about that?')) {
+        return;
+      }
+
+      this.deleteById(commentId);
+      this.$http["delete"]("".concat(this.postId, "/comments/").concat(commentId));
+    },
+    deleteById: function deleteById(commentId) {
+      var _this4 = this;
+
+      this.comments.map(function (comment, index) {
+        if (comment.id === commentId) {
+          _this4.comments.splice(index, 1);
+
+          return;
+        }
+
+        comment.replies.data.map(function (reply, replyIndex) {
+          if (reply.id === commentId) {
+            _this4.comments[index].replies.data.splice(replyIndex, 1);
+
+            return;
+          }
+        });
+      });
+    },
+    // Yes, these should be refactored.
+    createEdit: function createEdit(commentId) {
+      var _this5 = this;
+
+      this.$http.patch("".concat(this.postId, "/comments/").concat(commentId), {
+        body: this.editBody
+      }).then(function (response) {
+        console.log(response);
+
+        _this5.editById(commentId, response);
+
+        _this5.editBody = null;
+        _this5.editFormVisible = null;
+      }, function (response) {
+        console.log('OH NO'); // this.errors = response.body.errors.body
+      });
+    },
+    editById: function editById(commentId, response) {
+      var _this6 = this;
+
+      this.comments.map(function (comment, index) {
+        if (comment.id === commentId) {
+          console.log('Before edit');
+          console.log(_this6.comments);
+          _this6.comments[index].body = response.body.body;
+          _this6.comments[index].updated_at = response.body.updated_at;
+          _this6.comments[index].updated_at_human = '< 1 minute ago';
+          console.log('After edit');
+          console.log(_this6.comments);
+          return;
+        }
+
+        comment.replies.data.map(function (reply, replyIndex) {
+          if (reply.id === commentId) {
+            console.log(response.body.body);
+            console.log(reply.body);
+            console.log(_this6.comments[index].replies.data[replyIndex].body);
+            _this6.comments[index].replies.data[replyIndex].body = response.body.body;
+            _this6.comments[index].replies.data[replyIndex].updated_at = response.body.updated_at;
+            _this6.comments[index].replies.data[replyIndex].updated_at_human = '< 1 minute ago';
+            return;
+          }
+        });
+      });
+    },
+    toggleEditForm: function toggleEditForm(commentId) {
+      this.editBody = null; // Check if selected form is the current open and close if true
+      // Others handled by v-if in template: line 44
+
+      if (this.editFormVisible === commentId) {
+        this.editFormVisible = null;
+        return;
+      }
+
+      ;
+      this.editFormVisible = commentId;
     }
   },
   mounted: function mounted() {
@@ -1926,10 +2176,15 @@ vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vue_resource__WEBPACK_IMPORTED_MODU
 
 __webpack_require__(/*! vue-resource */ "./node_modules/vue-resource/dist/vue-resource.esm.js");
 
+vue__WEBPACK_IMPORTED_MODULE_1__.default.http.interceptors.push(function (request, next) {
+  request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+  next();
+});
 vue__WEBPACK_IMPORTED_MODULE_1__.default.component('hello-world', __webpack_require__(/*! ./components/HelloWorld.vue */ "./resources/js/components/HelloWorld.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_1__.default.component('post-comments', __webpack_require__(/*! ./components/PostComments.vue */ "./resources/js/components/PostComments.vue").default);
 var app = new vue__WEBPACK_IMPORTED_MODULE_1__.default({
-  el: '#app'
+  el: '#app',
+  data: window.hackernews
 }); // const { post } = require("jquery");
 // async function enableUpvoteFunctionality() {
 //     const upvoteIcon = document.querySelector(".upvoteIcon");
@@ -37527,7 +37782,73 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.comments
     ? _c("div", [
-        _c("p", [_vm._v("hello hello hello")]),
+        _c("p", { staticClass: "mt-4" }, [
+          _vm._v(_vm._s(_vm.comments.length) + " comments")
+        ]),
+        _vm._v(" "),
+        _vm.$root.user.authenticated
+          ? _c("div", { staticClass: "mb-4" }, [
+              _c("div", [
+                _c(
+                  "label",
+                  {
+                    staticClass: "sr-only",
+                    attrs: { for: "comment-body", id: "comment-body" }
+                  },
+                  [_vm._v("Post comment")]
+                ),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.body,
+                      expression: "body"
+                    }
+                  ],
+                  staticClass:
+                    "bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent",
+                  attrs: { name: "comment-body", placeholder: "Add a comment" },
+                  domProps: { value: _vm.body },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.body = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "commentBtn text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
+                    attrs: { "aria-label": "Submit", type: "submit" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.createComment($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Post comment")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-red-500" }, [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(_vm.errors ? _vm.errors[0] : "") +
+                    "\n        "
+                )
+              ])
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "ul",
@@ -37540,7 +37861,402 @@ var render = function() {
                 staticClass:
                   "bg-gray-200 my-4 px-2 border dark:bg-transparent dark:border-solid dark:border-white border-opacity-20"
               },
-              [_c("p", [_vm._v("hello")])]
+              [
+                _c(
+                  "div",
+                  [
+                    _c("div", [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href:
+                              "/users/" + comment.user.data.username + "/posts"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "w-16 h-auto max-h-16",
+                            attrs: {
+                              src: comment.user.data.avatar,
+                              alt: comment.user.data.username + " avatar"
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-blue-500",
+                          attrs: {
+                            href:
+                              "/users/" + comment.user.data.username + "/posts"
+                          }
+                        },
+                        [_vm._v(_vm._s(comment.user.data.username))]
+                      ),
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(comment.created_at_human) +
+                          "\n                    "
+                      ),
+                      _c("span", [
+                        _vm._v(
+                          " : last update " +
+                            _vm._s(comment.updated_at_human) +
+                            " "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(comment.body))])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c("ul", { staticClass: "text-sm" }, [
+                        _vm.$root.user.authenticated
+                          ? _c("li", { staticClass: "text-blue-500" }, [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.toggleReplyForm(comment.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.replyFormVisible === comment.id
+                                        ? "Cancel"
+                                        : "Reply"
+                                    )
+                                  )
+                                ]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "text-red-500" }, [
+                          _vm.$root.user.id === parseInt(comment.user_id)
+                            ? _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.deleteComment(comment.id)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Delete")]
+                              )
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm.replyFormVisible === comment.id
+                        ? _c("div", [
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.replyBody,
+                                  expression: "replyBody"
+                                }
+                              ],
+                              staticClass:
+                                "bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent",
+                              attrs: {
+                                name: "comment-reply-body",
+                                placeholder: "Add a reply"
+                              },
+                              domProps: { value: _vm.replyBody },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.replyBody = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "bg-hacker-orange text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
+                                attrs: {
+                                  "aria-label": "Submit",
+                                  type: "submit"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.createReply(comment.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Post reply")]
+                            )
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c("ul", { staticClass: "text-sm" }, [
+                        _vm.$root.user.authenticated
+                          ? _c("li", { staticClass: "text-green-500" }, [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.toggleEditForm(comment.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.editFormVisible === comment.id
+                                        ? "Cancel"
+                                        : "Edit"
+                                    )
+                                  )
+                                ]
+                              )
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _vm.editFormVisible === comment.id
+                        ? _c("div", [
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.editBody,
+                                  expression: "editBody"
+                                }
+                              ],
+                              staticClass:
+                                "bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent",
+                              attrs: {
+                                name: "comment-edit-body",
+                                placeholder: comment.body
+                              },
+                              domProps: { value: _vm.editBody },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.editBody = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "bg-hacker-orange text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
+                                attrs: {
+                                  "aria-label": "Submit",
+                                  type: "submit"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.createEdit(comment.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Post edit")]
+                            )
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(comment.replies.data, function(reply) {
+                      return _c(
+                        "li",
+                        {
+                          key: reply.id,
+                          staticClass:
+                            "ml-8 bg-gray-200 my-4 pl-4 border-l-2 border-red-500 dark:bg-transparent dark:border-solid border-opacity-50"
+                        },
+                        [
+                          _c("div", [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href:
+                                    "/users/" +
+                                    reply.user.data.username +
+                                    "/posts"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "w-16 h-auto max-h-16",
+                                  attrs: {
+                                    src: reply.user.data.avatar,
+                                    alt: reply.user.data.username + " avatar"
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "text-blue-500",
+                                attrs: {
+                                  href:
+                                    "/users/" +
+                                    reply.user.data.username +
+                                    "/posts"
+                                }
+                              },
+                              [_vm._v(_vm._s(comment.user.data.username))]
+                            ),
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(reply.created_at_human) +
+                                "\n                        "
+                            ),
+                            _c("span", [
+                              _vm._v(
+                                " : last update " +
+                                  _vm._s(reply.updated_at_human) +
+                                  " "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [_vm._v(_vm._s(reply.body))])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", {}, [
+                            _c("ul", { staticClass: "text-sm" }, [
+                              _c("li", { staticClass: "text-red-500" }, [
+                                _vm.$root.user.id === parseInt(reply.user_id)
+                                  ? _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.deleteComment(reply.id)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Delete")]
+                                    )
+                                  : _vm._e()
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "text-sm" }, [
+                              _vm.$root.user.authenticated
+                                ? _c("li", { staticClass: "text-green-500" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.toggleEditForm(reply.id)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.editFormVisible === reply.id
+                                              ? "Cancel"
+                                              : "Edit"
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _vm.editFormVisible === reply.id
+                              ? _c("div", [
+                                  _c("textarea", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.editBody,
+                                        expression: "editBody"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent",
+                                    attrs: {
+                                      name: "comment-edit-body",
+                                      placeholder: reply.body
+                                    },
+                                    domProps: { value: _vm.editBody },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.editBody = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "bg-hacker-orange text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
+                                      attrs: {
+                                        "aria-label": "Submit",
+                                        type: "submit"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.createEdit(reply.id)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Post edit")]
+                                  )
+                                ])
+                              : _vm._e()
+                          ])
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]
             )
           }),
           0

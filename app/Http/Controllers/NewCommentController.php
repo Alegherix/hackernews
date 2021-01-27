@@ -45,10 +45,21 @@ class NewCommentController extends Controller
 
 	public function delete(Post $post, Comment $comment)
 	{
-		$this->authorize('delete', $comment);
+		// $this->authorize('delete', $comment);
 		// Fix input validation if time
 		$comment->delete();
 
 		return response()->json(null, 200);
+	}
+
+	public function update(Post $post, Comment $comment, CommentRequest $request)
+	{
+		// $this->authorize('delete', $comment);
+		// Fix input validation if time
+		$comment->body = $request->body;
+		// $comment->update();
+		$comment->save();
+
+		return response()->json($comment, 200);
 	}
 }

@@ -45,6 +45,7 @@ Route::get("/users/{id}", [UserController::class, "show"]);
 Route::get('/posts/{post}/comments', [NewCommentController::class, 'index'])->name('posts.comments');
 Route::post('/posts/{post}/comments', [NewCommentController::class, 'create']);
 Route::delete('/posts/{post}/comments/{comment}', [NewCommentController::class, 'delete']);
+Route::patch('/posts/{post}/comments/{comment}', [NewCommentController::class, 'update']);
 
 // Route::post("/comments/{post}", [CommentController::class, "store"]);
 // Route::put("/comments/{id}", [CommentController::class, "update"]);

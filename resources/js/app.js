@@ -7,11 +7,17 @@ window.Vue = require('vue').default;
 Vue.use(VueResource);
 require('vue-resource');
 
+Vue.http.interceptors.push((request, next) => {
+    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    next();
+});
+
 Vue.component('hello-world', require('./components/HelloWorld.vue').default);
 Vue.component('post-comments', require('./components/PostComments.vue').default);
 
 const app = new Vue({
-    el: '#app',
+	el: '#app',
+	data: window.hackernews
 });
 
 
