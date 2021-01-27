@@ -40,7 +40,7 @@
 
         <div id="app">
             {{-- post id should be passed in here for the loops --}}
-            <post-comments></post-comments>
+            <post-comments post-id="{{ $post->id }}"></post-comments>
         </div>
     </div>
 </section>

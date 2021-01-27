@@ -17,7 +17,7 @@ export default {
 		}
 	},
 	props: {
-
+        postId: null,
 	},
 	methods: {
         getComments() {

@@ -1887,7 +1887,9 @@ __webpack_require__.r(__webpack_exports__);
       comments: []
     };
   },
-  props: {},
+  props: {
+    postId: null
+  },
   methods: {
     getComments: function getComments() {
       var _this = this;
