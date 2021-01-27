@@ -46,7 +46,7 @@ When you're ready you can:
 1. Clone this repo
 
 ```bash
-  git clone https://github.com/Alegherix/hackernews.git
+git clone https://github.com/Alegherix/hackernews.git
 ```
 
 2. Change directory to hackernews
@@ -54,16 +54,34 @@ When you're ready you can:
 3. Install dependencies
 
 ```bash
-  composer install
+composer install
 ```
 
-4. Change the DB_DATABASE variable in the .env file to the absolute path of the database in database/database.sqlite
+4. Set up environment
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
 5. Start the server
 
 ```bash
 php artisan serve
 ```
+
+<details>
+<summary>Setting up for development</summary>
+```
+git clone https://github.com/felixgren/hacker-news.git
+cd hacker-news
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan serve --port=8080
+npm run watch
+```
+</details>
 
 ## Code Review - Daniel Borgström
 

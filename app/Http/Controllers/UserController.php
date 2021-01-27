@@ -71,7 +71,7 @@ class UserController extends Controller
     {
         return request()->validate([
             "email" => "required|min:5|email:rfc,dns", //|unique:users
-            "password" => "required|min:7",
+            "password" => "required|min:8",
             "avatar" => 'image|mimes:jpeg,png,jpg,gif'
         ]);
     }

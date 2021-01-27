@@ -2,6 +2,12 @@
 
 @section("content")
 <main>
+    
+    <p>Hey vue, you alive?</p>
+    <div id="app">
+        <hello-world> </hello-world> 
+    </div>
+
     <h1 class="banner">{{$banner}}</h1>
     <section class="info">
         <a class="routeBtn" href="{{route('posts.create')}}"><button class="commentBtn">Create Post</button></a>

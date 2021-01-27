@@ -1,5 +1,7 @@
 /node_modules
 /vendor
+/public/uploads/images
+.env
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
