@@ -8,7 +8,11 @@ module.exports = {
   ],
   darkMode: 'media', // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+		colors: {
+			'commentBtn-bg': '#303955',
+		  }
+	},
   },
   variants: {
     extend: {},

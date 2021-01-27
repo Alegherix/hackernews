@@ -40,18 +40,18 @@
                     <!-- Comment reply form & delete start -->
                     <div>
                         <ul class="text-sm">
-                            <li v-if="$root.user.authenticated" class="text-blue-500">
-                                <a href="#" @click.prevent="toggleReplyForm(comment.id)">{{ replyFormVisible === comment.id ? 'Cancel' : 'Reply' }}</a>
+                            <li v-if="$root.user.authenticated">
+                                <a href="#" class="text-blue-500 text-opacity-90" @click.prevent="toggleReplyForm(comment.id)">{{ replyFormVisible === comment.id ? 'Cancel' : 'Reply' }}</a>
                             </li>
-                            <li class="text-red-500">
-                                <a href="#" v-if="$root.user.id === parseInt(comment.user_id)" @click.prevent="deleteComment(comment.id)">Delete</a>
+                            <li>
+                                <a href="#" class="text-red-500" v-if="$root.user.id === parseInt(comment.user_id)" @click.prevent="deleteComment(comment.id)">Delete</a>
                             </li>
                         </ul>
 
                         <div v-if="replyFormVisible === comment.id">
                             <textarea name="comment-reply-body" v-model="replyBody"
                             class="bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent" placeholder="Add a reply"></textarea>
-                                <button aria-label="Submit" type="submit" @click.prevent="createReply(comment.id)" class="bg-hacker-orange text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90">Post reply</button>
+                                <button aria-label="Submit" type="submit" @click.prevent="createReply(comment.id)" class="bg-commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-md w-1/4 opacity-90">Post reply</button>
                         </div>
                     </div>
                     <!-- END -->
@@ -59,15 +59,15 @@
                     <!-- Comment edit form start -->
                     <div>
                         <ul class="text-sm">
-                            <li v-if="$root.user.authenticated" class="text-green-500">
-                                <a href="#" @click.prevent="toggleEditForm(comment.id)">{{ editFormVisible === comment.id ? 'Cancel' : 'Edit' }}</a>
+                            <li v-if="$root.user.authenticated">
+                                <a href="#" class="text-green-500" @click.prevent="toggleEditForm(comment.id)">{{ editFormVisible === comment.id ? 'Cancel' : 'Edit' }}</a>
                             </li>
                         </ul>
 
                         <div v-if="editFormVisible === comment.id">
                             <textarea name="comment-edit-body" v-model="editBody"
                             class="bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent" v-bind:placeholder="comment.body"></textarea>
-                                <button aria-label="Submit" type="submit" @click.prevent="createEdit(comment.id)" class="bg-hacker-orange text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90">Post edit</button>
+                                <button aria-label="Submit" type="submit" @click.prevent="createEdit(comment.id)" class="commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90">Post edit</button>
                         </div>
                     </div>
                     <!-- END -->
@@ -91,15 +91,15 @@
 
                         <!-- Comment reply delete & edit form start -->
                         <div class="">
-                            <ul class="text-sm">
-                                <li class="text-red-500">
-                                    <a href="#" v-if="$root.user.id === parseInt(reply.user_id)" @click.prevent="deleteComment(reply.id)">Delete</a>
+                            <ul class="text-xs">
+                                <li>
+                                    <a href="#" class="text-red-500" v-if="$root.user.id === parseInt(reply.user_id)" @click.prevent="deleteComment(reply.id)">Delete</a>
                                 </li>
                             </ul>
 
-                            <ul class="text-sm">
+                            <ul class="text-xs">
                                 <li v-if="$root.user.authenticated" class="text-green-500">
-                                    <a href="#" @click.prevent="toggleEditForm(reply.id)">{{ editFormVisible === reply.id ? 'Cancel' : 'Edit' }}</a>
+                                    <a href="#" class="text-green-500" @click.prevent="toggleEditForm(reply.id)">{{ editFormVisible === reply.id ? 'Cancel' : 'Edit' }}</a>
                                 </li>
                             </ul>
 

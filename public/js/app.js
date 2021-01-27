@@ -37917,10 +37917,11 @@ var render = function() {
                     _c("div", [
                       _c("ul", { staticClass: "text-sm" }, [
                         _vm.$root.user.authenticated
-                          ? _c("li", { staticClass: "text-blue-500" }, [
+                          ? _c("li", [
                               _c(
                                 "a",
                                 {
+                                  staticClass: "text-blue-500 text-opacity-90",
                                   attrs: { href: "#" },
                                   on: {
                                     click: function($event) {
@@ -37942,11 +37943,12 @@ var render = function() {
                             ])
                           : _vm._e(),
                         _vm._v(" "),
-                        _c("li", { staticClass: "text-red-500" }, [
+                        _c("li", [
                           _vm.$root.user.id === parseInt(comment.user_id)
                             ? _c(
                                 "a",
                                 {
+                                  staticClass: "text-red-500",
                                   attrs: { href: "#" },
                                   on: {
                                     click: function($event) {
@@ -37993,7 +37995,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass:
-                                  "bg-hacker-orange text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
+                                  "bg-commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-md w-1/4 opacity-90",
                                 attrs: {
                                   "aria-label": "Submit",
                                   type: "submit"
@@ -38014,10 +38016,11 @@ var render = function() {
                     _c("div", [
                       _c("ul", { staticClass: "text-sm" }, [
                         _vm.$root.user.authenticated
-                          ? _c("li", { staticClass: "text-green-500" }, [
+                          ? _c("li", [
                               _c(
                                 "a",
                                 {
+                                  staticClass: "text-green-500",
                                   attrs: { href: "#" },
                                   on: {
                                     click: function($event) {
@@ -38072,7 +38075,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass:
-                                  "bg-hacker-orange text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
+                                  "commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
                                 attrs: {
                                   "aria-label": "Submit",
                                   type: "submit"
@@ -38153,12 +38156,13 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", {}, [
-                            _c("ul", { staticClass: "text-sm" }, [
-                              _c("li", { staticClass: "text-red-500" }, [
+                            _c("ul", { staticClass: "text-xs" }, [
+                              _c("li", [
                                 _vm.$root.user.id === parseInt(reply.user_id)
                                   ? _c(
                                       "a",
                                       {
+                                        staticClass: "text-red-500",
                                         attrs: { href: "#" },
                                         on: {
                                           click: function($event) {
@@ -38173,12 +38177,13 @@ var render = function() {
                               ])
                             ]),
                             _vm._v(" "),
-                            _c("ul", { staticClass: "text-sm" }, [
+                            _c("ul", { staticClass: "text-xs" }, [
                               _vm.$root.user.authenticated
                                 ? _c("li", { staticClass: "text-green-500" }, [
                                     _c(
                                       "a",
                                       {
+                                        staticClass: "text-green-500",
                                         attrs: { href: "#" },
                                         on: {
                                           click: function($event) {
