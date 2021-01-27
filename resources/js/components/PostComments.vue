@@ -20,8 +20,8 @@
         </div>
 
         <ul class="">
-            <li v-for="comment in comments" :key="comment.id" class="bg-gray-200 my-4 px-2 border dark:bg-transparent dark:border-solid dark:border-white border-opacity-20">
-                <div>
+            <li v-for="comment in comments" :key="comment.id">
+                <div v-if="!comment.reply_id" class="bg-gray-200 my-4 px-2 border dark:bg-transparent dark:border-solid dark:border-white border-opacity-20"> <!-- reply bug fix -->
                     <!-- Comments content start -->
                     <div>
                         <a :href="'/users/' + comment.user.data.username + '/posts'">
@@ -67,7 +67,7 @@
                         <div v-if="editFormVisible === comment.id">
                             <textarea name="comment-edit-body" v-model="editBody"
                             class="bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent" v-bind:placeholder="comment.body"></textarea>
-                                <button aria-label="Submit" type="submit" @click.prevent="createEdit(comment.id)" class="commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90">Post edit</button>
+                                <button aria-label="Submit" type="submit" @click.prevent="createEdit(comment.id)" class="bg-commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90">Post edit</button>
                         </div>
                     </div>
                     <!-- END -->
@@ -106,7 +106,7 @@
                             <div v-if="editFormVisible === reply.id">
                                 <textarea name="comment-edit-body" v-model="editBody"
                                 class="bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent" v-bind:placeholder="reply.body"></textarea>
-                                    <button aria-label="Submit" type="submit" @click.prevent="createEdit(reply.id)" class="bg-hacker-orange text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90">Post edit</button>
+                                    <button aria-label="Submit" type="submit" @click.prevent="createEdit(reply.id)" class="bg-commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90">Post edit</button>
                             </div>
                         </div>
                         <!-- END -->
@@ -136,16 +136,19 @@ export default {
 	methods: {
         getComments() {
             this.$http.get(`/posts/${this.postId}/comments`).then(response => {
-                this.comments = response.body.data;
+				this.comments = response.body.data;
+				console.log(this.comments);
             });
 		},
         createComment () {
             this.$http.post(`/posts/${this.postId}/comments`, {
                 body: this.body
             }).then(response => {
+				console.log('unshift');
+				console.log(response.data.data);
                 this.comments.unshift(response.data.data);
                 this.body = null; // Clear comment content from input field
-                this.errors = null; // Clear error message
+				this.errors = null; // Clear error message
             }, response => {
                 console.log('NOPE');
             });
@@ -163,7 +166,7 @@ export default {
                 });
                 this.replyBody = null;
                 this.replyFormVisible = null; // Close reply window
-                this.errors = null;
+				this.errors = null;
             }, response => {
                 this.errors = response.body.errors.body
             });
@@ -189,7 +192,7 @@ export default {
 		},
         deleteById (commentId) {
             this.comments.map((comment, index) => {
-                    if (comment.id === commentId) {
+                    if (comment.id === commentId && comment.reply_id === null) {
                         this.comments.splice(index, 1);
                         return;
                     }

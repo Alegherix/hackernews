@@ -25,6 +25,7 @@ class CommentTransformer extends TransformerAbstract
 			'created_at_human' => $comment->created_at->diffForHumans(),
 			'updated_at' => $comment->updated_at->toDateTimeString(),
 			'updated_at_human' => $comment->updated_at->diffForHumans(),
+			'reply_id' => $comment->reply_id,
 		];
 	}
 

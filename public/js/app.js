@@ -2013,6 +2013,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$http.get("/posts/".concat(this.postId, "/comments")).then(function (response) {
         _this.comments = response.body.data;
+        console.log(_this.comments);
       });
     },
     createComment: function createComment() {
@@ -2021,6 +2022,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$http.post("/posts/".concat(this.postId, "/comments"), {
         body: this.body
       }).then(function (response) {
+        console.log('unshift');
+        console.log(response.data.data);
+
         _this2.comments.unshift(response.data.data);
 
         _this2.body = null; // Clear comment content from input field
@@ -2076,7 +2080,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       this.comments.map(function (comment, index) {
-        if (comment.id === commentId) {
+        if (comment.id === commentId && comment.reply_id === null) {
           _this4.comments.splice(index, 1);
 
           return;
@@ -37854,415 +37858,424 @@ var render = function() {
           "ul",
           {},
           _vm._l(_vm.comments, function(comment) {
-            return _c(
-              "li",
-              {
-                key: comment.id,
-                staticClass:
-                  "bg-gray-200 my-4 px-2 border dark:bg-transparent dark:border-solid dark:border-white border-opacity-20"
-              },
-              [
-                _c(
-                  "div",
-                  [
-                    _c("div", [
-                      _c(
-                        "a",
-                        {
-                          attrs: {
-                            href:
-                              "/users/" + comment.user.data.username + "/posts"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "w-16 h-auto max-h-16",
+            return _c("li", { key: comment.id }, [
+              !comment.reply_id
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "bg-gray-200 my-4 px-2 border dark:bg-transparent dark:border-solid dark:border-white border-opacity-20"
+                    },
+                    [
+                      _c("div", [
+                        _c(
+                          "a",
+                          {
                             attrs: {
-                              src: comment.user.data.avatar,
-                              alt: comment.user.data.username + " avatar"
+                              href:
+                                "/users/" +
+                                comment.user.data.username +
+                                "/posts"
                             }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue-500",
-                          attrs: {
-                            href:
-                              "/users/" + comment.user.data.username + "/posts"
-                          }
-                        },
-                        [_vm._v(_vm._s(comment.user.data.username))]
-                      ),
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(comment.created_at_human) +
-                          "\n                    "
-                      ),
-                      _c("span", [
-                        _vm._v(
-                          " : last update " +
-                            _vm._s(comment.updated_at_human) +
-                            " "
+                          },
+                          [
+                            _c("img", {
+                              staticClass: "w-16 h-auto max-h-16",
+                              attrs: {
+                                src: comment.user.data.avatar,
+                                alt: comment.user.data.username + " avatar"
+                              }
+                            })
+                          ]
                         )
                       ]),
                       _vm._v(" "),
-                      _c("p", [_vm._v(_vm._s(comment.body))])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("ul", { staticClass: "text-sm" }, [
-                        _vm.$root.user.authenticated
-                          ? _c("li", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "text-blue-500 text-opacity-90",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      return _vm.toggleReplyForm(comment.id)
-                                    }
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.replyFormVisible === comment.id
-                                        ? "Cancel"
-                                        : "Reply"
-                                    )
-                                  )
-                                ]
-                              )
-                            ])
-                          : _vm._e(),
+                      _c("div", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-blue-500",
+                            attrs: {
+                              href:
+                                "/users/" +
+                                comment.user.data.username +
+                                "/posts"
+                            }
+                          },
+                          [_vm._v(_vm._s(comment.user.data.username))]
+                        ),
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(comment.created_at_human) +
+                            "\n                    "
+                        ),
+                        _c("span", [
+                          _vm._v(
+                            " : last update " +
+                              _vm._s(comment.updated_at_human) +
+                              " "
+                          )
+                        ]),
                         _vm._v(" "),
-                        _c("li", [
-                          _vm.$root.user.id === parseInt(comment.user_id)
-                            ? _c(
-                                "a",
-                                {
-                                  staticClass: "text-red-500",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      return _vm.deleteComment(comment.id)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Delete")]
-                              )
-                            : _vm._e()
-                        ])
+                        _c("p", [_vm._v(_vm._s(comment.body))])
                       ]),
                       _vm._v(" "),
-                      _vm.replyFormVisible === comment.id
-                        ? _c("div", [
-                            _c("textarea", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.replyBody,
-                                  expression: "replyBody"
-                                }
-                              ],
-                              staticClass:
-                                "bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent",
-                              attrs: {
-                                name: "comment-reply-body",
-                                placeholder: "Add a reply"
-                              },
-                              domProps: { value: _vm.replyBody },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.replyBody = $event.target.value
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "bg-commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-md w-1/4 opacity-90",
-                                attrs: {
-                                  "aria-label": "Submit",
-                                  type: "submit"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.createReply(comment.id)
-                                  }
-                                }
-                              },
-                              [_vm._v("Post reply")]
-                            )
+                      _c("div", [
+                        _c("ul", { staticClass: "text-sm" }, [
+                          _vm.$root.user.authenticated
+                            ? _c("li", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "text-blue-500 text-opacity-90",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.toggleReplyForm(comment.id)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.replyFormVisible === comment.id
+                                          ? "Cancel"
+                                          : "Reply"
+                                      )
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("li", [
+                            _vm.$root.user.id === parseInt(comment.user_id)
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "text-red-500",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.deleteComment(comment.id)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Delete")]
+                                )
+                              : _vm._e()
                           ])
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("ul", { staticClass: "text-sm" }, [
-                        _vm.$root.user.authenticated
-                          ? _c("li", [
+                        ]),
+                        _vm._v(" "),
+                        _vm.replyFormVisible === comment.id
+                          ? _c("div", [
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.replyBody,
+                                    expression: "replyBody"
+                                  }
+                                ],
+                                staticClass:
+                                  "bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent",
+                                attrs: {
+                                  name: "comment-reply-body",
+                                  placeholder: "Add a reply"
+                                },
+                                domProps: { value: _vm.replyBody },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.replyBody = $event.target.value
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
                               _c(
-                                "a",
+                                "button",
                                 {
-                                  staticClass: "text-green-500",
-                                  attrs: { href: "#" },
+                                  staticClass:
+                                    "bg-commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-md w-1/4 opacity-90",
+                                  attrs: {
+                                    "aria-label": "Submit",
+                                    type: "submit"
+                                  },
                                   on: {
                                     click: function($event) {
                                       $event.preventDefault()
-                                      return _vm.toggleEditForm(comment.id)
+                                      return _vm.createReply(comment.id)
                                     }
                                   }
                                 },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.editFormVisible === comment.id
-                                        ? "Cancel"
-                                        : "Edit"
-                                    )
-                                  )
-                                ]
+                                [_vm._v("Post reply")]
                               )
                             ])
                           : _vm._e()
                       ]),
                       _vm._v(" "),
-                      _vm.editFormVisible === comment.id
-                        ? _c("div", [
-                            _c("textarea", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.editBody,
-                                  expression: "editBody"
-                                }
-                              ],
-                              staticClass:
-                                "bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent",
-                              attrs: {
-                                name: "comment-edit-body",
-                                placeholder: comment.body
-                              },
-                              domProps: { value: _vm.editBody },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                      _c("div", [
+                        _c("ul", { staticClass: "text-sm" }, [
+                          _vm.$root.user.authenticated
+                            ? _c("li", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "text-green-500",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.toggleEditForm(comment.id)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.editFormVisible === comment.id
+                                          ? "Cancel"
+                                          : "Edit"
+                                      )
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _vm.editFormVisible === comment.id
+                          ? _c("div", [
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.editBody,
+                                    expression: "editBody"
                                   }
-                                  _vm.editBody = $event.target.value
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
+                                ],
                                 staticClass:
-                                  "commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
+                                  "bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent",
                                 attrs: {
-                                  "aria-label": "Submit",
-                                  type: "submit"
+                                  name: "comment-edit-body",
+                                  placeholder: comment.body
                                 },
+                                domProps: { value: _vm.editBody },
                                 on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.createEdit(comment.id)
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.editBody = $event.target.value
                                   }
                                 }
-                              },
-                              [_vm._v("Post edit")]
-                            )
-                          ])
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(comment.replies.data, function(reply) {
-                      return _c(
-                        "li",
-                        {
-                          key: reply.id,
-                          staticClass:
-                            "ml-8 bg-gray-200 my-4 pl-4 border-l-2 border-red-500 dark:bg-transparent dark:border-solid border-opacity-50"
-                        },
-                        [
-                          _c("div", [
-                            _c(
-                              "a",
-                              {
-                                attrs: {
-                                  href:
-                                    "/users/" +
-                                    reply.user.data.username +
-                                    "/posts"
-                                }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "w-16 h-auto max-h-16",
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "bg-commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
                                   attrs: {
-                                    src: reply.user.data.avatar,
-                                    alt: reply.user.data.username + " avatar"
+                                    "aria-label": "Submit",
+                                    type: "submit"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.createEdit(comment.id)
+                                    }
                                   }
-                                })
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-blue-500",
-                                attrs: {
-                                  href:
-                                    "/users/" +
-                                    reply.user.data.username +
-                                    "/posts"
-                                }
-                              },
-                              [_vm._v(_vm._s(comment.user.data.username))]
-                            ),
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(reply.created_at_human) +
-                                "\n                        "
-                            ),
-                            _c("span", [
-                              _vm._v(
-                                " : last update " +
-                                  _vm._s(reply.updated_at_human) +
-                                  " "
+                                },
+                                [_vm._v("Post edit")]
+                              )
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(comment.replies.data, function(reply) {
+                        return _c(
+                          "li",
+                          {
+                            key: reply.id,
+                            staticClass:
+                              "ml-8 bg-gray-200 my-4 pl-4 border-l-2 border-red-500 dark:bg-transparent dark:border-solid border-opacity-50"
+                          },
+                          [
+                            _c("div", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    href:
+                                      "/users/" +
+                                      reply.user.data.username +
+                                      "/posts"
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    staticClass: "w-16 h-auto max-h-16",
+                                    attrs: {
+                                      src: reply.user.data.avatar,
+                                      alt: reply.user.data.username + " avatar"
+                                    }
+                                  })
+                                ]
                               )
                             ]),
                             _vm._v(" "),
-                            _c("p", [_vm._v(_vm._s(reply.body))])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", {}, [
-                            _c("ul", { staticClass: "text-xs" }, [
-                              _c("li", [
-                                _vm.$root.user.id === parseInt(reply.user_id)
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "text-red-500",
-                                        attrs: { href: "#" },
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            return _vm.deleteComment(reply.id)
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("Delete")]
-                                    )
-                                  : _vm._e()
-                              ])
+                            _c("div", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "text-blue-500",
+                                  attrs: {
+                                    href:
+                                      "/users/" +
+                                      reply.user.data.username +
+                                      "/posts"
+                                  }
+                                },
+                                [_vm._v(_vm._s(comment.user.data.username))]
+                              ),
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(reply.created_at_human) +
+                                  "\n                        "
+                              ),
+                              _c("span", [
+                                _vm._v(
+                                  " : last update " +
+                                    _vm._s(reply.updated_at_human) +
+                                    " "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v(_vm._s(reply.body))])
                             ]),
                             _vm._v(" "),
-                            _c("ul", { staticClass: "text-xs" }, [
-                              _vm.$root.user.authenticated
-                                ? _c("li", { staticClass: "text-green-500" }, [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "text-green-500",
-                                        attrs: { href: "#" },
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            return _vm.toggleEditForm(reply.id)
+                            _c("div", {}, [
+                              _c("ul", { staticClass: "text-xs" }, [
+                                _c("li", [
+                                  _vm.$root.user.id === parseInt(reply.user_id)
+                                    ? _c(
+                                        "a",
+                                        {
+                                          staticClass: "text-red-500",
+                                          attrs: { href: "#" },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.deleteComment(reply.id)
+                                            }
                                           }
-                                        }
-                                      },
+                                        },
+                                        [_vm._v("Delete")]
+                                      )
+                                    : _vm._e()
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("ul", { staticClass: "text-xs" }, [
+                                _vm.$root.user.authenticated
+                                  ? _c(
+                                      "li",
+                                      { staticClass: "text-green-500" },
                                       [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.editFormVisible === reply.id
-                                              ? "Cancel"
-                                              : "Edit"
-                                          )
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass: "text-green-500",
+                                            attrs: { href: "#" },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.toggleEditForm(
+                                                  reply.id
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.editFormVisible === reply.id
+                                                  ? "Cancel"
+                                                  : "Edit"
+                                              )
+                                            )
+                                          ]
                                         )
                                       ]
                                     )
+                                  : _vm._e()
+                              ]),
+                              _vm._v(" "),
+                              _vm.editFormVisible === reply.id
+                                ? _c("div", [
+                                    _c("textarea", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.editBody,
+                                          expression: "editBody"
+                                        }
+                                      ],
+                                      staticClass:
+                                        "bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent",
+                                      attrs: {
+                                        name: "comment-edit-body",
+                                        placeholder: reply.body
+                                      },
+                                      domProps: { value: _vm.editBody },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.editBody = $event.target.value
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "bg-commentBtn-bg text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
+                                        attrs: {
+                                          "aria-label": "Submit",
+                                          type: "submit"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.createEdit(reply.id)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Post edit")]
+                                    )
                                   ])
                                 : _vm._e()
-                            ]),
-                            _vm._v(" "),
-                            _vm.editFormVisible === reply.id
-                              ? _c("div", [
-                                  _c("textarea", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.editBody,
-                                        expression: "editBody"
-                                      }
-                                    ],
-                                    staticClass:
-                                      "bg-gray-100 border border-solid border-gray-300 w-full mt-2 p-2 rounded-sm dark:border-gray-400 dark:bg-transparent",
-                                    attrs: {
-                                      name: "comment-edit-body",
-                                      placeholder: reply.body
-                                    },
-                                    domProps: { value: _vm.editBody },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.editBody = $event.target.value
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "bg-hacker-orange text-sm text-white text-semibold py-1 mt-2 rounded-sm w-1/4 opacity-90",
-                                      attrs: {
-                                        "aria-label": "Submit",
-                                        type: "submit"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.createEdit(reply.id)
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Post edit")]
-                                  )
-                                ])
-                              : _vm._e()
-                          ])
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]
-            )
+                            ])
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                : _vm._e()
+            ])
           }),
           0
         )
