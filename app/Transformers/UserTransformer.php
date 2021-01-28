@@ -9,11 +9,11 @@ use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
 {
-	public function transform(User $user)
-	{
-		return [
-			'username' => $user->name,
-			'avatar' => $user->avatar,
-		];
-	}
+    public function transform(User $user)
+    {
+        return [
+            'username' => $user->name,
+            'avatar' => $user->avatar,
+        ];
+    }
 }

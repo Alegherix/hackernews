@@ -8,29 +8,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Comment extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-	protected $fillable = [
-		'body',
-		'user_id',
-		'reply_id',
-	];
+    protected $fillable = [
+        'body',
+        'user_id',
+        'reply_id',
+    ];
 
-	protected $guarded = [];
+    protected $guarded = [];
 
-	public function commentable()
-	{
-		return $this->morphTo();
-	}
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
 
-	// References comment id so no polymorphic relation
-	public function replies()
-	{
-		return $this->hasMany(Comment::class, 'reply_id', 'id');
-	}
+    // References comment id so no polymorphic relation
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'reply_id', 'id');
+    }
 
-	public function user()
-	{
-		return $this->belongsTo(User::class);
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

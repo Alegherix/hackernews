@@ -10,55 +10,54 @@ use App\Transformers\CommentTransformer;
 
 class NewCommentController extends Controller
 {
-	// public function __construct()
-	// {
-	//     $this->middleware(['auth'])->only(['create', 'delete']);
-	// }
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth'])->only(['create', 'delete']);
+    // }
 
-	public function index(Post $post)
-	{
-		return response()->json(
-			fractal()->collection($post->comments()->latest()->get())
-				->parseIncludes(['replies', 'user', 'replies.user'])
-				->transformWith(new CommentTransformer)
-				->toArray()
+    public function index(Post $post)
+    {
+        return response()->json(
+            fractal()->collection($post->comments()->latest()->get())
+                ->parseIncludes(['replies', 'user', 'replies.user'])
+                ->transformWith(new CommentTransformer)
+                ->toArray()
+        );
+    }
 
-		);
-	}
+    public function create(CommentRequest $request, Post $post)
+    {
+        $comment = $post->comments()->create([
+            'body' => $request->body,
+            'reply_id' => $request->get('reply_id', null),
+            'user_id' => $request->user()->id,
+        ]);
 
-	public function create(CommentRequest $request, Post $post)
-	{
-		$comment = $post->comments()->create([
-			'body' => $request->body,
-			'reply_id' => $request->get('reply_id', null),
-			'user_id' => $request->user()->id,
-		]);
+        return response()->json(
+            fractal()->item($comment)
+                ->parseIncludes(['user', 'replies'])
+                ->transformWith(new CommentTransformer)
+                ->toArray()
+        );
+    }
 
-		return response()->json(
-			fractal()->item($comment)
-				->parseIncludes(['user', 'replies'])
-				->transformWith(new CommentTransformer)
-				->toArray()
-		);
-	}
+    public function delete(Post $post, Comment $comment)
+    {
+        // $this->authorize('delete', $comment);
+        // Fix input validation if time
+        $comment->delete();
 
-	public function delete(Post $post, Comment $comment)
-	{
-		// $this->authorize('delete', $comment);
-		// Fix input validation if time
-		$comment->delete();
+        return response()->json(null, 200);
+    }
 
-		return response()->json(null, 200);
-	}
+    public function update(Post $post, Comment $comment, CommentRequest $request)
+    {
+        // $this->authorize('delete', $comment);
+        // Fix input validation if time
+        $comment->body = $request->body;
+        // $comment->update();
+        $comment->save();
 
-	public function update(Post $post, Comment $comment, CommentRequest $request)
-	{
-		// $this->authorize('delete', $comment);
-		// Fix input validation if time
-		$comment->body = $request->body;
-		// $comment->update();
-		$comment->save();
-
-		return response()->json($comment, 200);
-	}
+        return response()->json($comment, 200);
+    }
 }
