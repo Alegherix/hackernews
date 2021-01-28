@@ -32,12 +32,12 @@ class CommentTransformer extends TransformerAbstract
     // Connect to UserTransformer
     public function includeUser(Comment $comment)
     {
-        return $this->item($comment->user, new UserTransformer);
+        return $this->item($comment->user, new UserTransformer());
     }
 
     // Connect to replies function in Comment model
     public function includeReplies(Comment $comment)
     {
-        return $this->collection($comment->replies, new CommentTransformer);
+        return $this->collection($comment->replies, new CommentTransformer());
     }
 }

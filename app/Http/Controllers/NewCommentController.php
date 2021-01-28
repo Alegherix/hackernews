@@ -20,7 +20,7 @@ class NewCommentController extends Controller
         return response()->json(
             fractal()->collection($post->comments()->latest()->get())
                 ->parseIncludes(['replies', 'user', 'replies.user'])
-                ->transformWith(new CommentTransformer)
+                ->transformWith(new CommentTransformer())
                 ->toArray()
         );
     }
@@ -36,7 +36,7 @@ class NewCommentController extends Controller
         return response()->json(
             fractal()->item($comment)
                 ->parseIncludes(['user', 'replies'])
-                ->transformWith(new CommentTransformer)
+                ->transformWith(new CommentTransformer())
                 ->toArray()
         );
     }
